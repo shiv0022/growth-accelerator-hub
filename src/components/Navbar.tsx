@@ -13,9 +13,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0e1a]/95 backdrop-blur-md border-b border-white/10">
       <div className="container-main flex items-center justify-between h-16">
-        <span className="font-heading font-extrabold text-xl tracking-tight">
+        <span className="font-heading font-extrabold text-xl tracking-tight text-white">
           Recall<span className="text-primary">X</span> Marketing
         </span>
 
@@ -25,7 +25,7 @@ const Navbar = () => {
             <button
               key={l}
               onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
             >
               {l}
             </button>
@@ -36,19 +36,19 @@ const Navbar = () => {
         </div>
 
         {/* Mobile toggle */}
-        <button className="md:hidden" onClick={() => setOpen(!open)}>
+        <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-card border-b border-border px-6 pb-4 flex flex-col gap-3">
+        <div className="md:hidden bg-[#0a0e1a] border-b border-white/10 px-6 pb-4 flex flex-col gap-3">
           {links.map((l) => (
             <button
               key={l}
               onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground text-left py-1"
+              className="text-sm font-medium text-white/70 hover:text-white text-left py-1"
             >
               {l}
             </button>
