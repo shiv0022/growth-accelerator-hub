@@ -36,9 +36,10 @@ const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden bg-background">
       {/* Soft radial gradient background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/8 blur-[120px]" />
-        <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] rounded-full bg-primary/5 blur-[80px]" />
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full opacity-30 blur-[100px]" style={{ background: 'radial-gradient(circle, hsl(216 56% 42%) 0%, transparent 70%)' }} />
+        <div className="absolute top-[30%] left-[60%] w-[500px] h-[500px] rounded-full opacity-20 blur-[80px]" style={{ background: 'radial-gradient(circle, hsl(216 56% 52%) 0%, transparent 70%)' }} />
+        <div className="absolute top-[60%] left-[30%] w-[400px] h-[400px] rounded-full opacity-15 blur-[60px]" style={{ background: 'radial-gradient(circle, hsl(216 56% 60%) 0%, transparent 70%)' }} />
       </div>
 
       <div ref={ref} className="container-main text-center max-w-3xl mx-auto relative z-10">
