@@ -6,7 +6,7 @@ const services = [
   { icon: Search, title: "SEO & Organic Growth", desc: "Rank higher, drive organic traffic, and build lasting search authority." },
   { icon: GitBranch, title: "Funnel & Conversion Optimization", desc: "Turn traffic into revenue with high-converting funnels and landing pages." },
   { icon: Globe, title: "Website & App Development", desc: "Fast, responsive, conversion-focused websites and web applications." },
-  { icon: Sparkles, title: "AI Content & Script Strategy", desc: "AI-powered content creation for ads, emails, and social that converts." },
+  { icon: Sparkles, title: "Google Business Profile", desc: "Optimize your Google Business Profile to boost local visibility and attract nearby customers." },
   { icon: Star, title: "Reputation & Review Management", desc: "Build trust with proactive review management and brand monitoring." },
 ];
 
