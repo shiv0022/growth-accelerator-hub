@@ -30,10 +30,10 @@ const CaseStudiesSection = () => {
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{c.label}</p>
                   {c.metrics.map((m) => (
                     <div key={m.unit} className="flex items-baseline gap-3">
+                      <p className="text-3xl font-extrabold text-primary">{m.after}</p>
                       {m.before !== "—" && (
                         <p className="text-sm text-muted-foreground line-through">{m.before}</p>
                       )}
-                      <p className="text-3xl font-extrabold text-primary">{m.after}</p>
                       <p className="text-sm text-muted-foreground">{m.unit}</p>
                     </div>
                   ))}
