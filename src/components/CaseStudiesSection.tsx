@@ -1,4 +1,5 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import resultsDashboard from "@/assets/results-dashboard.jpg";
 
 const cases = [
   { label: "E-Commerce Brand", metrics: [{ before: "1.2X", after: "3.8X", unit: "ROAS" }] },
@@ -17,25 +18,32 @@ const CaseStudiesSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold">Proven Performance</h2>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {cases.map((c, i) => (
-            <div
-              key={c.label}
-              className={`bg-background rounded-xl border border-border p-8 text-center ${isVisible ? "animate-fade-up" : "opacity-0"}`}
-              style={{ animationDelay: `${i * 120}ms` }}
-            >
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-6">{c.label}</p>
-              {c.metrics.map((m) => (
-                <div key={m.unit}>
-                  {m.before !== "—" && (
-                    <p className="text-sm text-muted-foreground line-through mb-1">{m.before} {m.unit}</p>
-                  )}
-                  <p className="text-4xl font-extrabold text-primary">{m.after}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{m.unit}</p>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid gap-6">
+            {cases.map((c, i) => (
+              <div
+                key={c.label}
+                className={`bg-background rounded-xl border border-border p-6 flex items-center gap-6 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <div className="flex-1">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{c.label}</p>
+                  {c.metrics.map((m) => (
+                    <div key={m.unit} className="flex items-baseline gap-3">
+                      {m.before !== "—" && (
+                        <p className="text-sm text-muted-foreground line-through">{m.before}</p>
+                      )}
+                      <p className="text-3xl font-extrabold text-primary">{m.after}</p>
+                      <p className="text-sm text-muted-foreground">{m.unit}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
+          <div className={`rounded-2xl overflow-hidden shadow-xl ${isVisible ? "animate-fade-up [animation-delay:200ms]" : "opacity-0"}`}>
+            <img src={resultsDashboard} alt="Performance dashboard showing growth metrics" className="w-full h-auto object-cover" />
+          </div>
         </div>
       </div>
     </section>
