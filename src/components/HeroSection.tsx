@@ -39,20 +39,20 @@ const HeroSection = () => {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div ref={ref} className="container-main text-center max-w-3xl mx-auto relative z-10">
-        <div className={`inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6 ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
-          <span className="text-xs font-semibold text-primary uppercase tracking-widest">Data-Driven Growth Agency</span>
+        <div className={`inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 mb-6 ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
+          <span className="text-xs font-semibold text-primary-foreground uppercase tracking-widest">Data-Driven Growth Agency</span>
         </div>
-        <h1 className={`text-4xl md:text-6xl font-extrabold leading-tight tracking-tight ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
+        <h1 className={`text-4xl md:text-6xl font-extrabold leading-tight tracking-tight text-white ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           Scale Faster. Convert Better.{" "}
-          <span className="text-primary">Dominate Digital.</span>
+          <span className="text-blue-400">Dominate Digital.</span>
         </h1>
-        <p className={`mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto ${isVisible ? "animate-fade-up [animation-delay:200ms]" : "opacity-0"}`}>
+        <p className={`mt-6 text-lg md:text-xl text-white/70 max-w-2xl mx-auto ${isVisible ? "animate-fade-up [animation-delay:200ms]" : "opacity-0"}`}>
           {displayedText}
-          {!isTypingDone && isVisible && <span className="inline-block w-0.5 h-5 bg-primary animate-pulse ml-0.5 align-middle" />}
+          {!isTypingDone && isVisible && <span className="inline-block w-0.5 h-5 bg-blue-400 animate-pulse ml-0.5 align-middle" />}
         </p>
         <div className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 ${isVisible ? "animate-fade-up [animation-delay:400ms]" : "opacity-0"}`}>
           <Button size="lg" onClick={() => scrollTo("contact")} className="gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
