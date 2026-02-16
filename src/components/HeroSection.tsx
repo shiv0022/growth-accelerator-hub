@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const subtitleText = "Performance marketing strategies designed to maximize ROI and accelerate measurable growth.";
 
@@ -8,36 +9,42 @@ const HeroSection = () => {
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
+  const { ref, isVisible } = useScrollReveal();
   const [displayedText, setDisplayedText] = useState("");
   const [isTypingDone, setIsTypingDone] = useState(false);
 
   useEffect(() => {
-    let i = 0;
-    setDisplayedText("");
-    setIsTypingDone(false);
-    const interval = setInterval(() => {
-      i++;
-      setDisplayedText(subtitleText.slice(0, i));
-      if (i >= subtitleText.length) {
-        clearInterval(interval);
-        setIsTypingDone(true);
-      }
-    }, 30);
-    return () => clearInterval(interval);
-  }, []);
+    if (isVisible) {
+      let i = 0;
+      setDisplayedText("");
+      setIsTypingDone(false);
+      const interval = setInterval(() => {
+        i++;
+        setDisplayedText(subtitleText.slice(0, i));
+        if (i >= subtitleText.length) {
+          clearInterval(interval);
+          setIsTypingDone(true);
+        }
+      }, 30);
+      return () => clearInterval(interval);
+    } else {
+      setDisplayedText("");
+      setIsTypingDone(false);
+    }
+  }, [isVisible]);
 
   return (
     <section className="pt-32 pb-20 md:pt-44 md:pb-32">
-      <div className="container-main text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight animate-fade-up">
+      <div ref={ref} className="container-main text-center max-w-3xl mx-auto">
+        <h1 className={`text-4xl md:text-6xl font-extrabold leading-tight tracking-tight ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           Scale Faster. Convert Better.{" "}
           <span className="text-primary">Dominate Digital.</span>
         </h1>
-        <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-up [animation-delay:200ms] opacity-0">
+        <p className={`mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto ${isVisible ? "animate-fade-up [animation-delay:200ms]" : "opacity-0"}`}>
           {displayedText}
-          {!isTypingDone && <span className="inline-block w-0.5 h-5 bg-primary animate-pulse ml-0.5 align-middle" />}
+          {!isTypingDone && isVisible && <span className="inline-block w-0.5 h-5 bg-primary animate-pulse ml-0.5 align-middle" />}
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
+        <div className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 ${isVisible ? "animate-fade-up [animation-delay:400ms]" : "opacity-0"}`}>
           <Button size="lg" onClick={() => scrollTo("contact")} className="gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
             Request Strategy Call <ArrowRight size={18} />
           </Button>
