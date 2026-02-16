@@ -39,7 +39,7 @@ const HeroSection = () => {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-background/85" />
       </div>
 
       <div ref={ref} className="container-main text-center max-w-3xl mx-auto relative z-10">
