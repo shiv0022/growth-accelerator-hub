@@ -11,7 +11,7 @@ const CaseStudiesSection = () => {
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section id="results" className="py-20 md:py-28 bg-card">
+    <section id="results" className="py-16 md:py-24 bg-card">
       <div ref={ref} className="container-main">
         <div className="text-center mb-14">
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-2">Results</p>

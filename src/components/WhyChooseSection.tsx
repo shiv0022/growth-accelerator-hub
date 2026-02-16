@@ -24,7 +24,7 @@ const WhyChooseSection = () => {
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section id="why-us" className="py-20 md:py-28 bg-card">
+    <section id="why-us" className="py-16 md:py-24 bg-card">
       <div ref={ref} className="container-main">
         <div className="text-center mb-14">
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-2">Why Us</p>
