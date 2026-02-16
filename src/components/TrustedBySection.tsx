@@ -2,16 +2,16 @@ const brands = ["Google Partner", "Meta Business", "HubSpot", "Shopify Plus", "A
 
 const TrustedBySection = () => {
   return (
-    <section className="py-10 bg-background">
+    <section className="py-8 bg-background">
       <div className="container-main">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest text-center mb-6">
-          Trusted By Industry Leaders
-        </p>
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14">
+          <span className="text-xs font-semibold text-muted-foreground/60 uppercase tracking-widest">
+            Trusted by
+          </span>
           {brands.map((brand) => (
             <span
               key={brand}
-              className="text-sm md:text-base font-heading font-bold text-muted-foreground/50 tracking-wide"
+              className="text-sm font-heading font-bold text-muted-foreground/40 tracking-wide"
             >
               {brand}
             </span>

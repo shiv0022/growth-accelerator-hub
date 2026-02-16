@@ -14,21 +14,23 @@ const ServicesSection = () => {
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section id="services" className="py-20 md:py-28">
+    <section id="services" className="py-16 md:py-24">
       <div ref={ref} className="container-main">
-        <div className="text-center mb-14">
+        <div className="text-center mb-12">
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-2">What We Do</p>
           <h2 className="text-3xl md:text-4xl font-bold">Services Built for Growth</h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s, i) => (
             <div
               key={s.title}
-              className={`group bg-card rounded-xl border border-border p-7 hover:shadow-lg hover:border-primary/30 transition-all duration-300 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
+              className={`group bg-card rounded-xl border border-border p-6 hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <s.icon className="text-primary mb-4" size={28} strokeWidth={1.5} />
-              <h3 className="font-heading font-bold text-lg mb-2">{s.title}</h3>
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <s.icon className="text-primary" size={20} strokeWidth={1.5} />
+              </div>
+              <h3 className="font-heading font-bold text-base mb-2">{s.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
             </div>
           ))}
