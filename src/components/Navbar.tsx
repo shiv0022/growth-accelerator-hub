@@ -20,12 +20,12 @@ const Navbar = () => {
         </span>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-5 lg:gap-8">
           {links.map((l) => (
             <button
               key={l}
               onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
             >
               {l}
             </button>
