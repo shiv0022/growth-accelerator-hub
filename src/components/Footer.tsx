@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-3 gap-10 mb-10">
           <div>
             <span className="font-heading font-extrabold text-xl">
-              Recall<span className="text-primary">X</span>
+              Recall <span className="text-primary">X</span> Marketing
             </span>
             <p className="text-sm text-footer-foreground/60 mt-3 leading-relaxed">
               Performance marketing strategies designed to maximize ROI and accelerate measurable growth.
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-footer-foreground/10 pt-6 text-center text-xs text-footer-foreground/40">
-          © {new Date().getFullYear()} RecallX Marketing. All rights reserved.
+          © {new Date().getFullYear()} Recall X Marketing. All rights reserved.
         </div>
       </div>
     </footer>
