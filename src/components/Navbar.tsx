@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md">
       <div className="container-main flex items-center justify-between h-16">
         <span className="font-heading font-extrabold text-xl tracking-tight text-foreground">
           Recall<span className="text-primary">X</span> Marketing
