@@ -11,7 +11,7 @@ const InquirySection = () => {
   const { ref, isVisible } = useScrollReveal();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", businessType: "", budget: "", goal: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", businessType: "", budget: "", goal: "", message: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -39,12 +39,12 @@ const InquirySection = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
-          email: "",
-          phone: "",
-          company: "",
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.businessType,
           budget: formData.budget,
           goal: formData.goal,
-          services: formData.businessType,
+          services: "",
           message: formData.message,
         }),
       });
@@ -54,7 +54,7 @@ const InquirySection = () => {
 
     setLoading(false);
     setSubmitted(true);
-    setFormData({ name: "", businessType: "", budget: "", goal: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", businessType: "", budget: "", goal: "", message: "" });
     setTimeout(() => setSubmitted(false), 5000);
   };
 
@@ -82,8 +82,12 @@ const InquirySection = () => {
           className={`bg-card rounded-xl border border-border p-8 space-y-5 ${isVisible ? "animate-fade-up [animation-delay:150ms]" : "opacity-0"}`}
         >
           <div className="grid sm:grid-cols-2 gap-5">
-            <Input name="name" placeholder="Your Name" required value={formData.name} onChange={handleChange} />
-            <Input name="businessType" placeholder="Business Type" required value={formData.businessType} onChange={handleChange} />
+            <Input name="name" placeholder="Your Name *" required value={formData.name} onChange={handleChange} />
+            <Input name="email" type="email" placeholder="Email Address *" required value={formData.email} onChange={handleChange} />
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            <Input name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} />
+            <Input name="businessType" placeholder="Business Type *" required value={formData.businessType} onChange={handleChange} />
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
             <Input name="budget" placeholder="Monthly Budget (e.g. ₹1L–₹3L)" value={formData.budget} onChange={handleChange} />
