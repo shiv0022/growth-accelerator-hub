@@ -25,12 +25,11 @@ const faqs = [
   },
 ];
 
-const WHATSAPP_NUMBER = "917982716224";
 const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxOSZr74hA1osy9_PcdFd2UQGeIMTRZoU8mCuYjNOcH8OmaNZepJa9_QdlRlkRuKjCt/exec";
 
 const contactInfo = [
   { icon: Mail, label: "Email Us", value: "hello@recallxmarketing.com", href: "mailto:hello@recallxmarketing.com" },
-  { icon: MessageCircle, label: "WhatsApp", value: "Chat with us directly", href: `https://wa.me/${WHATSAPP_NUMBER}` },
+  { icon: MessageCircle, label: "WhatsApp", value: "Chat with us directly", href: `https://wa.me/917982716224` },
   { icon: Clock, label: "Response Time", value: "Within 24 hours", href: null },
   { icon: MapPin, label: "Location", value: "India (Remote-First Agency)", href: null },
 ];
@@ -39,6 +38,7 @@ const SERVICES = ["Paid Ads", "SEO", "Funnel Optimization", "Website Development
 
 const ContactPage = () => {
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [] as string[], message: ""
   });
@@ -58,21 +58,6 @@ const ContactPage = () => {
     e.preventDefault();
     setLoading(true);
 
-    const msg = [
-      `👋 *New Inquiry from RecallX Website*`,
-      ``,
-      `*Name:* ${formData.name}`,
-      `*Email:* ${formData.email}`,
-      formData.phone ? `*Phone:* ${formData.phone}` : "",
-      formData.company ? `*Company:* ${formData.company}` : "",
-      formData.budget ? `*Monthly Budget:* ${formData.budget}` : "",
-      formData.goal ? `*Primary Goal:* ${formData.goal}` : "",
-      formData.services.length ? `*Services Interested:* ${formData.services.join(", ")}` : "",
-      formData.message ? `*Message:* ${formData.message}` : "",
-    ].filter(Boolean).join("\n");
-
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
     // Save to Google Sheets
     try {
       await fetch(SHEET_WEBHOOK, {
@@ -91,13 +76,14 @@ const ContactPage = () => {
         }),
       });
     } catch (_) {
-      // Silently fail — WhatsApp will still open
+      // Silently fail
     }
 
     setLoading(false);
-    window.open(waUrl, "_blank");
+    setSubmitted(true);
     (e.target as HTMLFormElement).reset();
     setFormData({ name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [], message: "" });
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
@@ -159,6 +145,15 @@ const ContactPage = () => {
           {/* Form */}
           <div className="lg:col-span-2">
             <h2 className="text-xl font-bold mb-6">Send Us a Message</h2>
+            {submitted && (
+              <div className="mb-6 flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-xl px-5 py-4">
+                <svg className="text-primary shrink-0" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div>
+                  <p className="font-semibold text-sm text-foreground">Message Sent Successfully!</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">We'll get back to you within 24 hours.</p>
+                </div>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="bg-card rounded-2xl border border-border p-8 space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
@@ -217,10 +212,10 @@ const ContactPage = () => {
                 />
               </div>
               <Button type="submit" size="lg" className="w-full gap-2 shadow-lg shadow-primary/20" disabled={loading}>
-                {loading ? "Opening WhatsApp..." : "Send Message via WhatsApp"} <Send size={16} />
+                {loading ? "Submitting..." : "Send Message"} <Send size={16} />
               </Button>
               <p className="text-xs text-center text-muted-foreground">
-                Form submit hone par WhatsApp open hoga with your details pre-filled.
+                Your details are saved securely. We'll reach out within 24 hours.
               </p>
             </form>
           </div>

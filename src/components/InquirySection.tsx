@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, CheckCircle2 } from "lucide-react";
 
-const WHATSAPP_NUMBER = "917982716224";
 const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxOSZr74hA1osy9_PcdFd2UQGeIMTRZoU8mCuYjNOcH8OmaNZepJa9_QdlRlkRuKjCt/exec";
 
 const InquirySection = () => {
@@ -32,8 +31,6 @@ const InquirySection = () => {
       formData.message ? `*Message:* ${formData.message}` : "",
     ].filter(Boolean).join("\n");
 
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
     // Save to Google Sheets
     try {
       await fetch(SHEET_WEBHOOK, {
@@ -52,12 +49,11 @@ const InquirySection = () => {
         }),
       });
     } catch (_) {
-      // Silently fail — WhatsApp will still open
+      // Silently fail
     }
 
     setLoading(false);
     setSubmitted(true);
-    window.open(waUrl, "_blank");
     setFormData({ name: "", businessType: "", budget: "", goal: "", message: "" });
     setTimeout(() => setSubmitted(false), 5000);
   };
@@ -75,8 +71,8 @@ const InquirySection = () => {
           <div className="mb-6 flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-xl px-5 py-4 animate-fade-up">
             <CheckCircle2 className="text-primary shrink-0" size={20} />
             <div>
-              <p className="font-semibold text-sm text-foreground">WhatsApp खुल रहा है!</p>
-              <p className="text-xs text-muted-foreground mt-0.5">आपकी details pre-filled हैं — बस Send करें।</p>
+            <p className="font-semibold text-sm text-foreground">Inquiry Successfully Submitted!</p>
+              <p className="text-xs text-muted-foreground mt-0.5">We'll get back to you within 24 hours.</p>
             </div>
           </div>
         )}
@@ -95,10 +91,10 @@ const InquirySection = () => {
           </div>
           <Textarea name="message" placeholder="Tell us more about your project..." rows={4} value={formData.message} onChange={handleChange} />
           <Button type="submit" size="lg" className="w-full gap-2 shadow-lg shadow-primary/20" disabled={loading}>
-            {loading ? "Opening WhatsApp..." : "Get Custom Growth Plan"} <Send size={16} />
+            {loading ? "Submitting..." : "Get Custom Growth Plan"} <Send size={16} />
           </Button>
           <p className="text-xs text-center text-muted-foreground">
-            Submit करने पर WhatsApp open होगा with your details pre-filled.
+            Your details will be saved securely. We'll reach out within 24 hours.
           </p>
         </form>
       </div>
