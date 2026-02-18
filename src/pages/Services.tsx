@@ -148,6 +148,15 @@ const ServicesPage = () => {
           ))}
         </div>
 
+        {/* CTA */}
+        <div className="container-main text-center mt-16">
+          <h3 className="text-2xl font-bold mb-3">Ready to get started?</h3>
+          <p className="text-muted-foreground mb-6">Let's build a custom strategy for your business.</p>
+          <Button size="lg" onClick={scrollToContact} className="gap-2 shadow-lg shadow-primary/20">
+            Request Free Strategy Call <ArrowRight size={18} />
+          </Button>
+        </div>
+
       </main>
       <Footer />
     </div>
