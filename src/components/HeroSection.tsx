@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useNavigate } from "react-router-dom";
 
 const subtitleText = "Performance marketing strategies designed to maximize ROI and accelerate measurable growth.";
 
 const highlights = ["Google & Meta Ads", "SEO & Organic Growth", "Website Development"];
 
 const HeroSection = () => {
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
 
   const { ref, isVisible } = useScrollReveal();
   const [displayedText, setDisplayedText] = useState("");
@@ -60,10 +60,10 @@ const HeroSection = () => {
         </div>
 
         <div className={`mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 ${isVisible ? "animate-fade-up [animation-delay:400ms]" : "opacity-0"}`}>
-          <Button size="lg" onClick={() => scrollTo("contact")} className="gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
+          <Button size="lg" onClick={() => navigate("/contact")} className="gap-2 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
             Request Strategy Call <ArrowRight size={18} />
           </Button>
-          <Button size="lg" variant="outline" onClick={() => scrollTo("results")}>
+          <Button size="lg" variant="outline" onClick={() => navigate("/results")}>
             View Our Work
           </Button>
         </div>
