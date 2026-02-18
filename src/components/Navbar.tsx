@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const links = [
+  { label: "Home", path: "/", section: "home" },
   { label: "Services", path: "/services", section: "services" },
   { label: "Why Us", path: "/why-us", section: "why-us" },
   { label: "Process", path: "/process", section: "process" },
@@ -17,6 +18,7 @@ const Navbar = () => {
 
   const handleNav = (path: string) => {
     navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setOpen(false);
   };
 

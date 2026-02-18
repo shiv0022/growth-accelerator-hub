@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ClipboardCheck, Lightbulb, Rocket, TrendingUp, CheckCircle } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Lightbulb, Rocket, TrendingUp, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -94,9 +93,6 @@ const ProcessPage = () => {
       <main className="pt-24 pb-20">
         {/* Hero */}
         <div className="container-main text-center max-w-3xl mx-auto mb-16">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
-            <ArrowLeft size={16} /> Back to Home
-          </Link>
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Our Process</p>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             How We Deliver <span className="text-primary">Consistent Results</span>
