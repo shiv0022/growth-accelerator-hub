@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Database, Target, Zap, FileText, Users, Award, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -50,6 +51,7 @@ const stats = [
 ];
 
 const WhyUsPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -104,7 +106,7 @@ const WhyUsPage = () => {
             <Award className="text-primary mx-auto mb-4" size={40} strokeWidth={1.5} />
             <h3 className="text-2xl font-bold mb-3">Ready to experience the difference?</h3>
             <p className="text-muted-foreground mb-6">Book a free 30-minute strategy call and see exactly how we'd grow your business.</p>
-            <Button size="lg" onClick={() => window.location.href = "/#contact"} className="gap-2 shadow-lg shadow-primary/20">
+            <Button size="lg" onClick={() => navigate("/contact")} className="gap-2 shadow-lg shadow-primary/20">
               Book Free Strategy Call <ArrowRight size={18} />
             </Button>
           </div>
