@@ -26,6 +26,7 @@ const faqs = [
 ];
 
 const WHATSAPP_NUMBER = "917982716224";
+const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxOSZr74hA1osy9_PcdFd2UQGeIMTRZoU8mCuYjNOcH8OmaNZepJa9_QdlRlkRuKjCt/exec";
 
 const contactInfo = [
   { icon: Mail, label: "Email Us", value: "hello@recallxmarketing.com", href: "mailto:hello@recallxmarketing.com" },
@@ -53,7 +54,7 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -72,12 +73,31 @@ const ContactPage = () => {
 
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-    setTimeout(() => {
-      setLoading(false);
-      window.open(waUrl, "_blank");
-      (e.target as HTMLFormElement).reset();
-      setFormData({ name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [], message: "" });
-    }, 500);
+    // Save to Google Sheets
+    try {
+      await fetch(SHEET_WEBHOOK, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          budget: formData.budget,
+          goal: formData.goal,
+          services: formData.services.join(", "),
+          message: formData.message,
+        }),
+      });
+    } catch (_) {
+      // Silently fail — WhatsApp will still open
+    }
+
+    setLoading(false);
+    window.open(waUrl, "_blank");
+    (e.target as HTMLFormElement).reset();
+    setFormData({ name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [], message: "" });
   };
 
   return (
