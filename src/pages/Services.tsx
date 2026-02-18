@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const services = [
   {
@@ -97,16 +98,57 @@ const services = [
   },
 ];
 
+const ServiceCard = ({ s, i }: { s: typeof services[0]; i: number }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${i * 80}ms` }}
+      className={`bg-card rounded-2xl border border-border p-8 md:p-10 flex flex-col md:flex-row gap-8 hover:shadow-lg hover:border-primary/30 transition-all duration-500 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+    >
+      <div className="flex-shrink-0">
+        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+          <s.icon className="text-primary" size={28} strokeWidth={1.5} />
+        </div>
+      </div>
+      <div className="flex-1">
+        <p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">{s.tagline}</p>
+        <h2 className="text-xl md:text-2xl font-bold mb-3">{s.title}</h2>
+        <p className="text-muted-foreground mb-5 leading-relaxed">{s.desc}</p>
+        <div className="grid sm:grid-cols-2 gap-2 mb-5">
+          {s.features.map((f) => (
+            <div key={f} className="flex items-center gap-2 text-sm text-foreground">
+              <CheckCircle size={14} className="text-primary flex-shrink-0" />
+              {f}
+            </div>
+          ))}
+        </div>
+        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-semibold px-4 py-2 rounded-full">
+          📈 {s.results}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ServicesPage = () => {
   const navigate = useNavigate();
-  const scrollToContact = () => navigate("/contact");
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.1);
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-20">
         {/* Hero */}
-        <div className="container-main text-center max-w-3xl mx-auto mb-16">
+        <div
+          ref={heroRef}
+          className={`container-main text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
+            heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Do</p>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             Services Built for <span className="text-primary">Measurable Growth</span>
@@ -119,44 +161,23 @@ const ServicesPage = () => {
         {/* Services */}
         <div className="container-main grid gap-10">
           {services.map((s, i) => (
-            <div
-              key={s.title}
-              className={`bg-card rounded-2xl border border-border p-8 md:p-10 flex flex-col md:flex-row gap-8 hover:shadow-lg hover:border-primary/30 transition-all duration-300`}
-            >
-              <div className="flex-shrink-0">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <s.icon className="text-primary" size={28} strokeWidth={1.5} />
-                </div>
-              </div>
-              <div className="flex-1">
-                <p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">{s.tagline}</p>
-                <h2 className="text-xl md:text-2xl font-bold mb-3">{s.title}</h2>
-                <p className="text-muted-foreground mb-5 leading-relaxed">{s.desc}</p>
-                <div className="grid sm:grid-cols-2 gap-2 mb-5">
-                  {s.features.map((f) => (
-                    <div key={f} className="flex items-center gap-2 text-sm text-foreground">
-                      <CheckCircle size={14} className="text-primary flex-shrink-0" />
-                      {f}
-                    </div>
-                  ))}
-                </div>
-                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-semibold px-4 py-2 rounded-full">
-                  📈 {s.results}
-                </div>
-              </div>
-            </div>
+            <ServiceCard key={s.title} s={s} i={i} />
           ))}
         </div>
 
         {/* CTA */}
-        <div className="container-main text-center mt-16">
+        <div
+          ref={ctaRef}
+          className={`container-main text-center mt-16 transition-all duration-700 ${
+            ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <h3 className="text-2xl font-bold mb-3">Ready to get started?</h3>
           <p className="text-muted-foreground mb-6">Let's build a custom strategy for your business.</p>
-          <Button size="lg" onClick={scrollToContact} className="gap-2 shadow-lg shadow-primary/20">
+          <Button size="lg" onClick={() => navigate("/contact")} className="gap-2 shadow-lg shadow-primary/20">
             Request Free Strategy Call <ArrowRight size={18} />
           </Button>
         </div>
-
       </main>
       <Footer />
     </div>

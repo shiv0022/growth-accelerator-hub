@@ -3,6 +3,7 @@ import { ArrowRight, Database, Target, Zap, FileText, Users, Award, Shield } fro
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const differentiators = [
   {
@@ -50,14 +51,50 @@ const stats = [
   { value: "50+", label: "Brands Scaled" },
 ];
 
+const DiffCard = ({ d, i }: { d: typeof differentiators[0]; i: number }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${i * 80}ms` }}
+      className={`bg-card rounded-2xl border border-border p-8 hover:shadow-lg hover:border-primary/30 transition-all duration-500 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+    >
+      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+        <d.icon className="text-primary" size={24} strokeWidth={1.5} />
+      </div>
+      <h2 className="text-xl font-bold mb-3">{d.title}</h2>
+      <p className="text-muted-foreground mb-5 leading-relaxed">{d.desc}</p>
+      <ul className="space-y-2">
+        {d.details.map((item) => (
+          <li key={item} className="flex items-center gap-2 text-sm text-foreground">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const WhyUsPage = () => {
   const navigate = useNavigate();
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.1);
+  const { ref: statsRef, isVisible: statsVisible } = useScrollReveal();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-20">
         {/* Hero */}
-        <div className="container-main text-center max-w-3xl mx-auto mb-16">
+        <div
+          ref={heroRef}
+          className={`container-main text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
+            heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Why Choose Us</p>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             The RecallX <span className="text-primary">Difference</span>
@@ -68,10 +105,16 @@ const WhyUsPage = () => {
         </div>
 
         {/* Stats */}
-        <div className="container-main mb-16">
+        <div ref={statsRef} className="container-main mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((s) => (
-              <div key={s.label} className="bg-card rounded-2xl border border-border p-6 text-center hover:border-primary/30 transition-all">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                style={{ transitionDelay: `${i * 100}ms` }}
+                className={`bg-card rounded-2xl border border-border p-6 text-center hover:border-primary/30 transition-all duration-500 ${
+                  statsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                }`}
+              >
                 <p className="text-4xl font-extrabold text-primary mb-2">{s.value}</p>
                 <p className="text-sm text-muted-foreground">{s.label}</p>
               </div>
@@ -81,27 +124,18 @@ const WhyUsPage = () => {
 
         {/* Differentiators */}
         <div className="container-main grid md:grid-cols-2 gap-8 mb-16">
-          {differentiators.map((d) => (
-            <div key={d.title} className="bg-card rounded-2xl border border-border p-8 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <d.icon className="text-primary" size={24} strokeWidth={1.5} />
-              </div>
-              <h2 className="text-xl font-bold mb-3">{d.title}</h2>
-              <p className="text-muted-foreground mb-5 leading-relaxed">{d.desc}</p>
-              <ul className="space-y-2">
-                {d.details.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-foreground">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {differentiators.map((d, i) => (
+            <DiffCard key={d.title} d={d} i={i % 2} />
           ))}
         </div>
 
         {/* CTA */}
-        <div className="container-main max-w-2xl mx-auto">
+        <div
+          ref={ctaRef}
+          className={`container-main max-w-2xl mx-auto transition-all duration-700 ${
+            ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <div className="bg-primary/5 border border-primary/20 rounded-2xl p-10 text-center">
             <Award className="text-primary mx-auto mb-4" size={40} strokeWidth={1.5} />
             <h3 className="text-2xl font-bold mb-3">Ready to experience the difference?</h3>
