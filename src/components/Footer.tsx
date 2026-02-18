@@ -47,7 +47,7 @@ const Footer = () => {
               <a href="mailto:hello@recallxmarketing.com" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail size={16} /> hello@recallxmarketing.com
               </a>
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a href="https://wa.me/917982716224" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <MessageCircle size={16} /> WhatsApp Us
               </a>
             </div>

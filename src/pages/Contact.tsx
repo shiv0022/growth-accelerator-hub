@@ -3,7 +3,6 @@ import { Mail, MessageCircle, Clock, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -26,25 +25,59 @@ const faqs = [
   },
 ];
 
+const WHATSAPP_NUMBER = "917982716224";
+
 const contactInfo = [
   { icon: Mail, label: "Email Us", value: "hello@recallxmarketing.com", href: "mailto:hello@recallxmarketing.com" },
-  { icon: MessageCircle, label: "WhatsApp", value: "Chat with us directly", href: "https://wa.me/1234567890" },
+  { icon: MessageCircle, label: "WhatsApp", value: "Chat with us directly", href: `https://wa.me/${WHATSAPP_NUMBER}` },
   { icon: Clock, label: "Response Time", value: "Within 24 hours", href: null },
   { icon: MapPin, label: "Location", value: "India (Remote-First Agency)", href: null },
 ];
 
+const SERVICES = ["Paid Ads", "SEO", "Funnel Optimization", "Website Development", "Google Business Profile", "Reputation Management"];
+
 const ContactPage = () => {
-  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [] as string[], message: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleCheckbox = (service: string, checked: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      services: checked ? [...prev.services, service] : prev.services.filter(s => s !== service)
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+
+    const msg = [
+      `👋 *New Inquiry from RecallX Website*`,
+      ``,
+      `*Name:* ${formData.name}`,
+      `*Email:* ${formData.email}`,
+      formData.phone ? `*Phone:* ${formData.phone}` : "",
+      formData.company ? `*Company:* ${formData.company}` : "",
+      formData.budget ? `*Monthly Budget:* ${formData.budget}` : "",
+      formData.goal ? `*Primary Goal:* ${formData.goal}` : "",
+      formData.services.length ? `*Services Interested:* ${formData.services.join(", ")}` : "",
+      formData.message ? `*Message:* ${formData.message}` : "",
+    ].filter(Boolean).join("\n");
+
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
     setTimeout(() => {
       setLoading(false);
-      toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
+      window.open(waUrl, "_blank");
       (e.target as HTMLFormElement).reset();
-    }, 1000);
+      setFormData({ name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [], message: "" });
+    }, 500);
   };
 
   return (
@@ -110,39 +143,44 @@ const ContactPage = () => {
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Your Name *</label>
-                  <Input placeholder="Rahul Sharma" required />
+                  <Input name="name" placeholder="Rahul Sharma" required value={formData.name} onChange={handleChange} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Email Address *</label>
-                  <Input type="email" placeholder="rahul@company.com" required />
+                  <Input name="email" type="email" placeholder="rahul@company.com" required value={formData.email} onChange={handleChange} />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Phone Number</label>
-                  <Input placeholder="+91 98765 43210" />
+                  <Input name="phone" placeholder="+91 98765 43210" value={formData.phone} onChange={handleChange} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Company / Business Name</label>
-                  <Input placeholder="Your Business" />
+                  <Input name="company" placeholder="Your Business" value={formData.company} onChange={handleChange} />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Monthly Ad Budget</label>
-                  <Input placeholder="e.g. ₹1L – ₹3L" />
+                  <Input name="budget" placeholder="e.g. ₹1L – ₹3L" value={formData.budget} onChange={handleChange} />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Primary Goal</label>
-                  <Input placeholder="e.g. More leads, Better ROAS" />
+                  <Input name="goal" placeholder="e.g. More leads, Better ROAS" value={formData.goal} onChange={handleChange} />
                 </div>
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium">What services are you interested in?</label>
                 <div className="grid sm:grid-cols-2 gap-2">
-                  {["Paid Ads", "SEO", "Funnel Optimization", "Website Development", "Google Business Profile", "Reputation Management"].map((s) => (
+                  {SERVICES.map((s) => (
                     <label key={s} className="flex items-center gap-2 text-sm cursor-pointer">
-                      <input type="checkbox" className="accent-primary" />
+                      <input
+                        type="checkbox"
+                        className="accent-primary"
+                        checked={formData.services.includes(s)}
+                        onChange={(e) => handleCheckbox(s, e.target.checked)}
+                      />
                       {s}
                     </label>
                   ))}
@@ -151,15 +189,18 @@ const ContactPage = () => {
               <div className="space-y-1.5">
                 <label className="text-sm font-medium">Tell us about your business & goals</label>
                 <Textarea
+                  name="message"
                   placeholder="Share anything that would help us understand your business better — current challenges, past marketing efforts, target audience, etc."
                   rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
                 />
               </div>
               <Button type="submit" size="lg" className="w-full gap-2 shadow-lg shadow-primary/20" disabled={loading}>
-                {loading ? "Sending..." : "Send Message & Get a Free Strategy"} <Send size={16} />
+                {loading ? "Opening WhatsApp..." : "Send Message via WhatsApp"} <Send size={16} />
               </Button>
               <p className="text-xs text-center text-muted-foreground">
-                We'll respond within 24 hours. No spam, no pressure — just honest advice.
+                Form submit hone par WhatsApp open hoga with your details pre-filled.
               </p>
             </form>
           </div>
