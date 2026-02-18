@@ -1,8 +1,16 @@
 import { Mail, MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+
+  const navLinks = [
+    { label: "Services", path: "/services" },
+    { label: "Why Us", path: "/why-us" },
+    { label: "Process", path: "/process" },
+    { label: "Results", path: "/results" },
+    { label: "Contact", path: "/contact" },
+  ];
 
   return (
     <footer className="bg-footer text-footer-foreground py-14">
@@ -20,13 +28,13 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-2 text-sm text-footer-foreground/70">
-              {["Services", "Why Us", "Process", "Results", "Contact"].map((l) => (
-                <li key={l}>
+              {navLinks.map((l) => (
+                <li key={l.label}>
                   <button
-                    onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
+                    onClick={() => navigate(l.path)}
                     className="hover:text-primary transition-colors"
                   >
-                    {l}
+                    {l.label}
                   </button>
                 </li>
               ))}
