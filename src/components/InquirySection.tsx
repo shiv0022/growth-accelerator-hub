@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Send, CheckCircle2 } from "lucide-react";
 
 const WHATSAPP_NUMBER = "917982716224";
+const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxOSZr74hA1osy9_PcdFd2UQGeIMTRZoU8mCuYjNOcH8OmaNZepJa9_QdlRlkRuKjCt/exec";
 
 const InquirySection = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -17,7 +18,7 @@ const InquirySection = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -33,13 +34,32 @@ const InquirySection = () => {
 
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      window.open(waUrl, "_blank");
-      setFormData({ name: "", businessType: "", budget: "", goal: "", message: "" });
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 500);
+    // Save to Google Sheets
+    try {
+      await fetch(SHEET_WEBHOOK, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: "",
+          phone: "",
+          company: "",
+          budget: formData.budget,
+          goal: formData.goal,
+          services: formData.businessType,
+          message: formData.message,
+        }),
+      });
+    } catch (_) {
+      // Silently fail — WhatsApp will still open
+    }
+
+    setLoading(false);
+    setSubmitted(true);
+    window.open(waUrl, "_blank");
+    setFormData({ name: "", businessType: "", budget: "", goal: "", message: "" });
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
