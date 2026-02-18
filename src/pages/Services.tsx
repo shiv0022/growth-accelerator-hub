@@ -1,4 +1,5 @@
 import { BarChart3, Search, GitBranch, Globe, Sparkles, Star, CheckCircle, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -97,9 +98,8 @@ const services = [
 ];
 
 const ServicesPage = () => {
-  const scrollToContact = () => {
-    window.location.href = "/#contact";
-  };
+  const navigate = useNavigate();
+  const scrollToContact = () => navigate("/contact");
 
   return (
     <div className="min-h-screen bg-background">

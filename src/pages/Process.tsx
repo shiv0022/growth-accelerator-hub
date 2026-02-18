@@ -1,4 +1,5 @@
 import { ArrowRight, ClipboardCheck, Lightbulb, Rocket, TrendingUp, CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -87,6 +88,7 @@ const steps = [
 ];
 
 const ProcessPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -155,7 +157,7 @@ const ProcessPage = () => {
         <div className="container-main text-center mt-20">
           <h3 className="text-2xl font-bold mb-3">Want to see this process in action?</h3>
           <p className="text-muted-foreground mb-6">Book a free strategy call and we'll walk you through exactly how we'd apply this to your business.</p>
-          <Button size="lg" onClick={() => window.location.href = "/#contact"} className="gap-2 shadow-lg shadow-primary/20">
+          <Button size="lg" onClick={() => navigate("/contact")} className="gap-2 shadow-lg shadow-primary/20">
             Book Free Strategy Call <ArrowRight size={18} />
           </Button>
         </div>

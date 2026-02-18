@@ -1,4 +1,5 @@
 import { ArrowRight, TrendingUp, Users, ShoppingCart, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -71,6 +72,7 @@ const overallStats = [
 ];
 
 const ResultsPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -151,7 +153,7 @@ const ResultsPage = () => {
         <div className="container-main text-center mt-16">
           <h3 className="text-2xl font-bold mb-3">Want results like these?</h3>
           <p className="text-muted-foreground mb-6">Let's talk about your business and how we can deliver similar outcomes.</p>
-          <Button size="lg" onClick={() => window.location.href = "/#contact"} className="gap-2 shadow-lg shadow-primary/20">
+          <Button size="lg" onClick={() => navigate("/contact")} className="gap-2 shadow-lg shadow-primary/20">
             Get a Free Strategy Call <ArrowRight size={18} />
           </Button>
         </div>
