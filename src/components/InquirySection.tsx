@@ -3,22 +3,43 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { Send } from "lucide-react";
+import { Send, CheckCircle2 } from "lucide-react";
+
+const WHATSAPP_NUMBER = "917982716224";
 
 const InquirySection = () => {
   const { ref, isVisible } = useScrollReveal();
-  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", businessType: "", budget: "", goal: "", message: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+
+    const msg = [
+      `👋 *New Inquiry from RecallX Website*`,
+      ``,
+      `*Name:* ${formData.name}`,
+      `*Business Type:* ${formData.businessType}`,
+      formData.budget ? `*Monthly Budget:* ${formData.budget}` : "",
+      formData.goal ? `*Primary Goal:* ${formData.goal}` : "",
+      formData.message ? `*Message:* ${formData.message}` : "",
+    ].filter(Boolean).join("\n");
+
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
     setTimeout(() => {
       setLoading(false);
-      toast({ title: "Request received!", description: "We'll get back to you within 24 hours." });
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
+      setSubmitted(true);
+      window.open(waUrl, "_blank");
+      setFormData({ name: "", businessType: "", budget: "", goal: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    }, 500);
   };
 
   return (
@@ -30,22 +51,35 @@ const InquirySection = () => {
           <p className="text-muted-foreground mt-3">Tell us about your business and goals. We'll craft a tailored strategy.</p>
         </div>
 
+        {submitted && (
+          <div className="mb-6 flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-xl px-5 py-4 animate-fade-up">
+            <CheckCircle2 className="text-primary shrink-0" size={20} />
+            <div>
+              <p className="font-semibold text-sm text-foreground">WhatsApp खुल रहा है!</p>
+              <p className="text-xs text-muted-foreground mt-0.5">आपकी details pre-filled हैं — बस Send करें।</p>
+            </div>
+          </div>
+        )}
+
         <form
           onSubmit={handleSubmit}
           className={`bg-card rounded-xl border border-border p-8 space-y-5 ${isVisible ? "animate-fade-up [animation-delay:150ms]" : "opacity-0"}`}
         >
           <div className="grid sm:grid-cols-2 gap-5">
-            <Input placeholder="Your Name" required />
-            <Input placeholder="Business Type" required />
+            <Input name="name" placeholder="Your Name" required value={formData.name} onChange={handleChange} />
+            <Input name="businessType" placeholder="Business Type" required value={formData.businessType} onChange={handleChange} />
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
-            <Input placeholder="Monthly Budget (e.g. $5K–$10K)" />
-            <Input placeholder="Primary Goal" />
+            <Input name="budget" placeholder="Monthly Budget (e.g. ₹1L–₹3L)" value={formData.budget} onChange={handleChange} />
+            <Input name="goal" placeholder="Primary Goal" value={formData.goal} onChange={handleChange} />
           </div>
-          <Textarea placeholder="Tell us more about your project..." rows={4} />
+          <Textarea name="message" placeholder="Tell us more about your project..." rows={4} value={formData.message} onChange={handleChange} />
           <Button type="submit" size="lg" className="w-full gap-2 shadow-lg shadow-primary/20" disabled={loading}>
-            {loading ? "Sending..." : "Get Custom Growth Plan"} <Send size={16} />
+            {loading ? "Opening WhatsApp..." : "Get Custom Growth Plan"} <Send size={16} />
           </Button>
+          <p className="text-xs text-center text-muted-foreground">
+            Submit करने पर WhatsApp open होगा with your details pre-filled.
+          </p>
         </form>
       </div>
     </section>
