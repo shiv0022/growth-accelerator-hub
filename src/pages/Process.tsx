@@ -3,6 +3,10 @@ import { ArrowLeft, ArrowRight, ClipboardCheck, Lightbulb, Rocket, TrendingUp, C
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import auditImg from "@/assets/process-audit.jpg";
+import strategyImg from "@/assets/process-strategy.jpg";
+import executeImg from "@/assets/process-execute.jpg";
+import scaleImg from "@/assets/process-scale.jpg";
 
 const steps = [
   {
@@ -21,6 +25,8 @@ const steps = [
     ],
     duration: "Week 1",
     output: "Comprehensive Audit Report",
+    image: auditImg,
+    imageAlt: "Marketing analytics dashboard audit",
   },
   {
     icon: Lightbulb,
@@ -38,6 +44,8 @@ const steps = [
     ],
     duration: "Week 2",
     output: "90-Day Growth Roadmap",
+    image: strategyImg,
+    imageAlt: "Strategy planning session on whiteboard",
   },
   {
     icon: Rocket,
@@ -55,6 +63,8 @@ const steps = [
     ],
     duration: "Weeks 3-4",
     output: "Live Campaigns + Tracking Dashboard",
+    image: executeImg,
+    imageAlt: "Campaign execution on laptop",
   },
   {
     icon: TrendingUp,
@@ -72,6 +82,8 @@ const steps = [
     ],
     duration: "Month 2 onwards",
     output: "Monthly Growth Reports + Scaling Plan",
+    image: scaleImg,
+    imageAlt: "Business growth scaling chart",
   },
 ];
 
@@ -94,56 +106,57 @@ const ProcessPage = () => {
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="container-main max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-border hidden sm:block" />
-
-            <div className="space-y-10">
-              {steps.map((s, i) => (
-                <div key={s.title} className={`relative flex flex-col md:flex-row gap-6 md:gap-12 ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
-                  {/* Step number bubble */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-primary text-primary-foreground font-extrabold text-sm items-center justify-center z-10 shadow-lg">
-                    {s.number}
-                  </div>
-
-                  {/* Content card */}
-                  <div className={`flex-1 ${i % 2 === 1 ? "md:text-right" : ""}`}>
-                    <div className="bg-card rounded-2xl border border-border p-8 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-                      <div className={`flex items-center gap-3 mb-1 ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <s.icon className="text-primary" size={20} strokeWidth={1.5} />
-                        </div>
-                        <span className="text-xs font-bold text-primary">{s.duration}</span>
-                      </div>
-                      <p className="text-xs font-semibold text-primary uppercase tracking-wider mt-4 mb-1">{s.tagline}</p>
-                      <h2 className="text-2xl font-bold mb-3">{s.title}</h2>
-                      <p className="text-muted-foreground mb-5 leading-relaxed">{s.desc}</p>
-                      <ul className={`space-y-2 mb-5 ${i % 2 === 1 ? "md:items-end" : ""}`}>
-                        {s.activities.map((a) => (
-                          <li key={a} className={`flex items-center gap-2 text-sm ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
-                            <CheckCircle size={13} className="text-primary flex-shrink-0" />
-                            {a}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className={`inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full`}>
-                        📋 Output: {s.output}
-                      </div>
+        {/* Steps */}
+        <div className="container-main space-y-16">
+          {steps.map((s, i) => {
+            const isEven = i % 2 === 0;
+            return (
+              <div
+                key={s.title}
+                className={`grid md:grid-cols-2 gap-10 items-center ${!isEven ? "md:[&>*:first-child]:order-2" : ""}`}
+              >
+                {/* Content Card */}
+                <div className="bg-card rounded-2xl border border-border p-8 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground font-extrabold text-sm flex items-center justify-center shadow-lg">
+                      {s.number}
                     </div>
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <s.icon className="text-primary" size={20} strokeWidth={1.5} />
+                    </div>
+                    <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">{s.duration}</span>
                   </div>
-
-                  {/* Spacer for alternating layout */}
-                  <div className="flex-1 hidden md:block" />
+                  <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">{s.tagline}</p>
+                  <h2 className="text-2xl font-bold mb-3">{s.title}</h2>
+                  <p className="text-muted-foreground mb-5 leading-relaxed">{s.desc}</p>
+                  <ul className="space-y-2 mb-5">
+                    {s.activities.map((a) => (
+                      <li key={a} className="flex items-center gap-2 text-sm">
+                        <CheckCircle size={13} className="text-primary flex-shrink-0" />
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full">
+                    📋 Output: {s.output}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
+
+                {/* Image */}
+                <div className="rounded-2xl overflow-hidden shadow-xl border border-border h-80 md:h-full">
+                  <img
+                    src={s.image}
+                    alt={s.imageAlt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* CTA */}
-        <div className="container-main text-center mt-16">
+        <div className="container-main text-center mt-20">
           <h3 className="text-2xl font-bold mb-3">Want to see this process in action?</h3>
           <p className="text-muted-foreground mb-6">Book a free strategy call and we'll walk you through exactly how we'd apply this to your business.</p>
           <Button size="lg" onClick={() => window.location.href = "/#contact"} className="gap-2 shadow-lg shadow-primary/20">
