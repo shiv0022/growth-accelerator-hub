@@ -1,36 +1,49 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const links = ["Services", "Why Us", "Process", "Results", "Contact"];
+const links = [
+  { label: "Services", path: "/services", section: "services" },
+  { label: "Why Us", path: "/why-us", section: "why-us" },
+  { label: "Process", path: "/process", section: "process" },
+  { label: "Results", path: "/results", section: "results" },
+  { label: "Contact", path: "/contact", section: "contact" },
+];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const handleNav = (path: string) => {
+    navigate(path);
     setOpen(false);
   };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md">
       <div className="container-main flex items-center justify-between h-16">
-        <span className="font-heading font-extrabold text-xl tracking-tight text-foreground">
+        <Link to="/" className="font-heading font-extrabold text-xl tracking-tight text-foreground">
           Recall<span className="text-primary">X</span> Marketing
-        </span>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-5 lg:gap-8">
           {links.map((l) => (
             <button
-              key={l}
-              onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+              key={l.label}
+              onClick={() => handleNav(l.path)}
+              className={`text-sm font-medium transition-colors whitespace-nowrap ${
+                location.pathname === l.path
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              {l}
+              {l.label}
             </button>
           ))}
-          <Button size="sm" onClick={() => scrollTo("contact")}>
+          <Button size="sm" onClick={() => handleNav("/contact")}>
             Get Started
           </Button>
         </div>
@@ -46,14 +59,18 @@ const Navbar = () => {
         <div className="md:hidden bg-background border-b border-border px-6 pb-4 flex flex-col gap-3">
           {links.map((l) => (
             <button
-              key={l}
-              onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground text-left py-1"
+              key={l.label}
+              onClick={() => handleNav(l.path)}
+              className={`text-sm font-medium text-left py-1 transition-colors ${
+                location.pathname === l.path
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              {l}
+              {l.label}
             </button>
           ))}
-          <Button size="sm" onClick={() => scrollTo("contact")} className="w-fit">
+          <Button size="sm" onClick={() => handleNav("/contact")} className="w-fit">
             Get Started
           </Button>
         </div>
