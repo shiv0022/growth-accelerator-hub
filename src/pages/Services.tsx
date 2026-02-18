@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft, BarChart3, Search, GitBranch, Globe, Sparkles, Star, CheckCircle, ArrowRight } from "lucide-react";
+import { BarChart3, Search, GitBranch, Globe, Sparkles, Star, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -108,9 +107,6 @@ const ServicesPage = () => {
       <main className="pt-24 pb-20">
         {/* Hero */}
         <div className="container-main text-center max-w-3xl mx-auto mb-16">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
-            <ArrowLeft size={16} /> Back to Home
-          </Link>
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">What We Do</p>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             Services Built for <span className="text-primary">Measurable Growth</span>
