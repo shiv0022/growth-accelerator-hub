@@ -7,6 +7,7 @@ import auditImg from "@/assets/process-audit.jpg";
 import strategyImg from "@/assets/process-strategy.jpg";
 import executeImg from "@/assets/process-execute.jpg";
 import scaleImg from "@/assets/process-scale.jpg";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const steps = [
   {
@@ -87,14 +88,74 @@ const steps = [
   },
 ];
 
+const StepRow = ({ s, i }: { s: typeof steps[0]; i: number }) => {
+  const { ref, isVisible } = useScrollReveal();
+  const isEven = i % 2 === 0;
+  return (
+    <div
+      ref={ref}
+      className={`grid md:grid-cols-2 gap-10 items-center transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      } ${!isEven ? "md:[&>*:first-child]:order-2" : ""}`}
+    >
+      {/* Content Card */}
+      <div className="bg-card rounded-2xl border border-border p-8 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground font-extrabold text-sm flex items-center justify-center shadow-lg">
+            {s.number}
+          </div>
+          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+            <s.icon className="text-primary" size={20} strokeWidth={1.5} />
+          </div>
+          <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">{s.duration}</span>
+        </div>
+        <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">{s.tagline}</p>
+        <h2 className="text-2xl font-bold mb-3">{s.title}</h2>
+        <p className="text-muted-foreground mb-5 leading-relaxed">{s.desc}</p>
+        <ul className="space-y-2 mb-5">
+          {s.activities.map((a) => (
+            <li key={a} className="flex items-center gap-2 text-sm">
+              <CheckCircle size={13} className="text-primary flex-shrink-0" />
+              {a}
+            </li>
+          ))}
+        </ul>
+        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full">
+          📋 Output: {s.output}
+        </div>
+      </div>
+
+      {/* Image */}
+      <div
+        className="rounded-2xl overflow-hidden shadow-xl border border-border h-80 md:h-full"
+        style={{ transitionDelay: "150ms" }}
+      >
+        <img
+          src={s.image}
+          alt={s.imageAlt}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  );
+};
+
 const ProcessPage = () => {
   const navigate = useNavigate();
+  const { ref: heroRef, isVisible: heroVisible } = useScrollReveal(0.1);
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-20">
         {/* Hero */}
-        <div className="container-main text-center max-w-3xl mx-auto mb-16">
+        <div
+          ref={heroRef}
+          className={`container-main text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
+            heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Our Process</p>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             How We Deliver <span className="text-primary">Consistent Results</span>
@@ -106,55 +167,18 @@ const ProcessPage = () => {
 
         {/* Steps */}
         <div className="container-main space-y-16">
-          {steps.map((s, i) => {
-            const isEven = i % 2 === 0;
-            return (
-              <div
-                key={s.title}
-                className={`grid md:grid-cols-2 gap-10 items-center ${!isEven ? "md:[&>*:first-child]:order-2" : ""}`}
-              >
-                {/* Content Card */}
-                <div className="bg-card rounded-2xl border border-border p-8 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground font-extrabold text-sm flex items-center justify-center shadow-lg">
-                      {s.number}
-                    </div>
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <s.icon className="text-primary" size={20} strokeWidth={1.5} />
-                    </div>
-                    <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">{s.duration}</span>
-                  </div>
-                  <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">{s.tagline}</p>
-                  <h2 className="text-2xl font-bold mb-3">{s.title}</h2>
-                  <p className="text-muted-foreground mb-5 leading-relaxed">{s.desc}</p>
-                  <ul className="space-y-2 mb-5">
-                    {s.activities.map((a) => (
-                      <li key={a} className="flex items-center gap-2 text-sm">
-                        <CheckCircle size={13} className="text-primary flex-shrink-0" />
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full">
-                    📋 Output: {s.output}
-                  </div>
-                </div>
-
-                {/* Image */}
-                <div className="rounded-2xl overflow-hidden shadow-xl border border-border h-80 md:h-full">
-                  <img
-                    src={s.image}
-                    alt={s.imageAlt}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            );
-          })}
+          {steps.map((s, i) => (
+            <StepRow key={s.title} s={s} i={i} />
+          ))}
         </div>
 
         {/* CTA */}
-        <div className="container-main text-center mt-20">
+        <div
+          ref={ctaRef}
+          className={`container-main text-center mt-20 transition-all duration-700 ${
+            ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <h3 className="text-2xl font-bold mb-3">Want to see this process in action?</h3>
           <p className="text-muted-foreground mb-6">Book a free strategy call and we'll walk you through exactly how we'd apply this to your business.</p>
           <Button size="lg" onClick={() => navigate("/contact")} className="gap-2 shadow-lg shadow-primary/20">
