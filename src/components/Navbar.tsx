@@ -8,7 +8,6 @@ const links = [
   { label: "Why Us", path: "/why-us", section: "why-us" },
   { label: "Process", path: "/process", section: "process" },
   { label: "Results", path: "/results", section: "results" },
-  { label: "Contact", path: "/contact", section: "contact" },
 ];
 
 const Navbar = () => {
