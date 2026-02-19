@@ -42,7 +42,7 @@ const contactInfo = [
   { icon: MapPin, label: "Location", value: "India (Remote-First)", href: null },
 ];
 
-const SERVICES = ["Paid Ads", "SEO", "Funnel Optimization", "Website Development", "Google Business Profile", "Reputation Management"];
+const SERVICES = ["Influencer Marketing", "Google Business Profile", "Website Development", "App Development", "Paid Ads", "Reputation Management"];
 
 const ContactPage = () => {
   const [loading, setLoading] = useState(false);

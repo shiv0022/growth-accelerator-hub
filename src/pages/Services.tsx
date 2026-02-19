@@ -1,4 +1,4 @@
-import { BarChart3, Search, GitBranch, Globe, Sparkles, Star, CheckCircle, ArrowRight } from "lucide-react";
+import { Users, Sparkles, Globe, Smartphone, BarChart3, Star, CheckCircle, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -7,64 +7,19 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const services = [
   {
-    icon: BarChart3,
-    title: "Paid Ads & Performance Marketing",
-    tagline: "Turn every rupee into measurable revenue",
-    desc: "Data-driven paid advertising campaigns across Google, Meta, Instagram & YouTube — engineered for maximum conversions and scale.",
+    icon: Users,
+    title: "Influencer Marketing",
+    tagline: "Reach millions through trusted voices",
+    desc: "We connect your brand with the right creators — micro to macro influencers — to drive authentic engagement, brand awareness, and conversions.",
     features: [
-      "Google Search & Display Ads",
-      "Meta (Facebook & Instagram) Ads",
-      "YouTube Video Advertising",
-      "Retargeting & Lookalike Audiences",
-      "A/B Testing & Creative Optimization",
-      "Detailed ROI & ROAS Reporting",
+      "Influencer Discovery & Vetting",
+      "Campaign Strategy & Brief Creation",
+      "Instagram, YouTube & Reels Campaigns",
+      "Performance Tracking & Analytics",
+      "UGC (User-Generated Content) Management",
+      "Long-Term Brand Ambassador Programs",
     ],
-    results: "Average 3.5X ROAS for our clients",
-  },
-  {
-    icon: Search,
-    title: "SEO & Organic Growth",
-    tagline: "Rank higher. Get found. Grow consistently.",
-    desc: "Comprehensive SEO strategies — from technical audits to content creation — that drive sustainable, compounding organic traffic.",
-    features: [
-      "Technical SEO Audit & Fixes",
-      "Keyword Research & Strategy",
-      "On-Page & Off-Page Optimization",
-      "Link Building & DA Improvement",
-      "Local SEO & Google Maps",
-      "Monthly Ranking Reports",
-    ],
-    results: "240% avg. organic traffic growth in 6 months",
-  },
-  {
-    icon: GitBranch,
-    title: "Funnel & Conversion Optimization",
-    tagline: "Stop losing leads. Start converting.",
-    desc: "We analyze, design, and optimize every stage of your sales funnel to maximize revenue from your existing traffic.",
-    features: [
-      "Landing Page Design & Testing",
-      "CRO Audits & Heatmap Analysis",
-      "Email & SMS Drip Sequences",
-      "Lead Magnet Creation",
-      "Cart Abandonment Recovery",
-      "Funnel Performance Analytics",
-    ],
-    results: "Up to 60% improvement in conversion rates",
-  },
-  {
-    icon: Globe,
-    title: "Website & App Development",
-    tagline: "Fast. Beautiful. Built to convert.",
-    desc: "We build fast, responsive, conversion-focused websites and web applications that reflect your brand and drive business results.",
-    features: [
-      "Custom Website Design & Development",
-      "E-Commerce Store Setup",
-      "Mobile-First & Responsive Design",
-      "Performance Optimization (Core Web Vitals)",
-      "CMS Integration (WordPress, Webflow)",
-      "Ongoing Maintenance & Support",
-    ],
-    results: "Sub-2s load times across all builds",
+    results: "Avg. 4.2X reach vs traditional paid ads",
   },
   {
     icon: Sparkles,
@@ -80,6 +35,51 @@ const services = [
       "Local Ranking Monitoring",
     ],
     results: "3X more local discovery clicks on average",
+  },
+  {
+    icon: Globe,
+    title: "Website Development",
+    tagline: "Fast. Beautiful. Built to convert.",
+    desc: "We design and develop fast, responsive, conversion-focused websites that reflect your brand and drive measurable business results.",
+    features: [
+      "Custom Website Design & Development",
+      "E-Commerce Store Setup",
+      "Mobile-First & Responsive Design",
+      "Performance Optimization (Core Web Vitals)",
+      "CMS Integration (WordPress, Webflow)",
+      "Ongoing Maintenance & Support",
+    ],
+    results: "Sub-2s load times across all builds",
+  },
+  {
+    icon: Smartphone,
+    title: "App Development",
+    tagline: "Your business, in your users' pockets.",
+    desc: "We build high-performance mobile and web applications tailored to your business needs — from concept to launch and beyond.",
+    features: [
+      "iOS & Android App Development",
+      "Progressive Web Apps (PWA)",
+      "UI/UX Design & Prototyping",
+      "API Integration & Backend Setup",
+      "App Store Submission & Optimization",
+      "Post-Launch Support & Updates",
+    ],
+    results: "Delivered 20+ apps with 4.5★+ ratings",
+  },
+  {
+    icon: BarChart3,
+    title: "Paid Ads & Performance Marketing",
+    tagline: "Turn every rupee into measurable revenue",
+    desc: "Data-driven paid advertising campaigns across Google, Meta, Instagram & YouTube — engineered for maximum conversions and scale.",
+    features: [
+      "Google Search & Display Ads",
+      "Meta (Facebook & Instagram) Ads",
+      "YouTube Video Advertising",
+      "Retargeting & Lookalike Audiences",
+      "A/B Testing & Creative Optimization",
+      "Detailed ROI & ROAS Reporting",
+    ],
+    results: "Average 3.5X ROAS for our clients",
   },
   {
     icon: Star,
