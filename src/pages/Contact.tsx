@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "What's the minimum budget to work with RecallX?",
-    a: "Our pricing depends on your work scope and goals — not a fixed number. We keep our packages market-competitive and genuinely affordable for Indian businesses. Whether you're just starting out or scaling up, we'll find a plan that fits your budget.",
+    a: "No fixed minimums — our pricing is based on the scope of work. We offer flexible, affordable packages designed to deliver real results without burning a hole in your pocket.",
   },
   {
     q: "Do you offer a free consultation?",
