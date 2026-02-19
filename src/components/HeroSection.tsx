@@ -5,33 +5,27 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useNavigate } from "react-router-dom";
 
 const subtitleText = "Performance marketing strategies designed to maximize ROI and accelerate measurable growth.";
+const words = subtitleText.split(" ");
 
 const highlights = ["Google & Meta Ads", "SEO & Organic Growth", "Website Development"];
 
 const HeroSection = () => {
   const navigate = useNavigate();
-
   const { ref, isVisible } = useScrollReveal();
-  const [displayedText, setDisplayedText] = useState("");
-  const [isTypingDone, setIsTypingDone] = useState(false);
+  const [visibleWords, setVisibleWords] = useState(0);
 
   useEffect(() => {
     if (isVisible) {
+      setVisibleWords(0);
       let i = 0;
-      setDisplayedText("");
-      setIsTypingDone(false);
       const interval = setInterval(() => {
         i++;
-        setDisplayedText(subtitleText.slice(0, i));
-        if (i >= subtitleText.length) {
-          clearInterval(interval);
-          setIsTypingDone(true);
-        }
-      }, 8);
+        setVisibleWords(i);
+        if (i >= words.length) clearInterval(interval);
+      }, 60);
       return () => clearInterval(interval);
     } else {
-      setDisplayedText("");
-      setIsTypingDone(false);
+      setVisibleWords(0);
     }
   }, [isVisible]);
 
@@ -46,9 +40,21 @@ const HeroSection = () => {
           Scale Faster. Convert Better.{" "}
           <span className="text-primary">Dominate Digital.</span>
         </h1>
-        <p className={`mt-5 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto ${isVisible ? "animate-fade-up [animation-delay:200ms]" : "opacity-0"}`}>
-          {displayedText}
-          {!isTypingDone && isVisible && <span className="inline-block w-0.5 h-5 bg-primary animate-pulse ml-0.5 align-middle" />}
+
+        <p className="mt-5 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto min-h-[3.5rem]">
+          {words.map((word, i) => (
+            <span
+              key={i}
+              className="inline-block mr-[0.3em] transition-all duration-300"
+              style={{
+                opacity: i < visibleWords ? 1 : 0,
+                transform: i < visibleWords ? "translateY(0)" : "translateY(10px)",
+                transitionDelay: `${i * 10}ms`,
+              }}
+            >
+              {word}
+            </span>
+          ))}
         </p>
 
         <div className={`mt-6 flex flex-wrap items-center justify-center gap-4 ${isVisible ? "animate-fade-up [animation-delay:300ms]" : "opacity-0"}`}>
@@ -73,3 +79,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
