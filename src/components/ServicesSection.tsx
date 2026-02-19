@@ -1,12 +1,12 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { BarChart3, Search, GitBranch, Globe, Sparkles, Star } from "lucide-react";
+import { Users, Sparkles, Globe, Smartphone, BarChart3, Star } from "lucide-react";
 
 const services = [
-  { icon: BarChart3, title: "Paid Ads & Performance Marketing", desc: "Data-driven campaigns across Google, Meta & more — optimized for conversions and scale." },
-  { icon: Search, title: "SEO & Organic Growth", desc: "Rank higher, drive organic traffic, and build lasting search authority." },
-  { icon: GitBranch, title: "Funnel & Conversion Optimization", desc: "Turn traffic into revenue with high-converting funnels and landing pages." },
-  { icon: Globe, title: "Website & App Development", desc: "Fast, responsive, conversion-focused websites and web applications." },
+  { icon: Users, title: "Influencer Marketing", desc: "Connect with the right creators to amplify your brand, drive engagement, and reach targeted audiences at scale." },
   { icon: Sparkles, title: "Google Business Profile", desc: "Optimize your Google Business Profile to boost local visibility and attract nearby customers." },
+  { icon: Globe, title: "Website Development", desc: "Fast, responsive, conversion-focused websites that reflect your brand and drive measurable results." },
+  { icon: Smartphone, title: "App Development", desc: "Custom mobile and web applications built for performance, usability, and business growth." },
+  { icon: BarChart3, title: "Paid Ads & Performance Marketing", desc: "Data-driven campaigns across Google, Meta & more — optimized for conversions and scale." },
   { icon: Star, title: "Reputation & Review Management", desc: "Build trust with proactive review management and brand monitoring." },
 ];
 
