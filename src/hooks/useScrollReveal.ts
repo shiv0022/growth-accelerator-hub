@@ -2,12 +2,19 @@ import { useEffect, useRef, useState } from "react";
 
 export function useScrollReveal(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
-  // Start as true so content is never hidden on initial render
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Check if already in viewport on mount
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    if (alreadyVisible) {
+      setIsVisible(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
