@@ -75,7 +75,7 @@ const InquirySection = () => {
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
             <Input name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} />
-            <Input name="businessType" placeholder="Business Type *" required value={formData.businessType} onChange={handleChange} />
+            <Input name="businessType" placeholder="Business Type" value={formData.businessType} onChange={handleChange} />
           </div>
           <Textarea name="message" placeholder="Tell us more about your project..." rows={4} value={formData.message} onChange={handleChange} />
           <Button type="submit" size="lg" className="w-full gap-2 shadow-lg shadow-primary/20" disabled={loading}>
