@@ -35,8 +35,8 @@ const HeroSection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-primary/10 blur-[150px]" />
       </div>
 
-      <div ref={ref} className="container-main text-center max-w-3xl mx-auto relative z-10">
-        <h1 className={`text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-foreground ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
+      <div ref={ref} className="container-main text-center max-w-5xl mx-auto relative z-10">
+        <h1 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight tracking-tight text-foreground ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           Scale Faster. Convert Better.{" "}
           <span className="text-primary">Dominate Digital.</span>
         </h1>
