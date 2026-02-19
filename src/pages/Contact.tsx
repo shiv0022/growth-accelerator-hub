@@ -40,7 +40,7 @@ const ContactPage = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [] as string[], message: ""
+    name: "", email: "", phone: "", company: "", services: [] as string[], message: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -69,8 +69,6 @@ const ContactPage = () => {
           email: formData.email,
           phone: formData.phone,
           company: formData.company,
-          budget: formData.budget,
-          goal: formData.goal,
           services: formData.services.join(", "),
           message: formData.message,
         }),
@@ -82,7 +80,7 @@ const ContactPage = () => {
     setLoading(false);
     setSubmitted(true);
     (e.target as HTMLFormElement).reset();
-    setFormData({ name: "", email: "", phone: "", company: "", budget: "", goal: "", services: [], message: "" });
+    setFormData({ name: "", email: "", phone: "", company: "", services: [], message: "" });
     setTimeout(() => setSubmitted(false), 5000);
   };
 
@@ -173,16 +171,6 @@ const ContactPage = () => {
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Company / Business Name</label>
                   <Input name="company" placeholder="Your Business" value={formData.company} onChange={handleChange} />
-                </div>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium">Monthly Ad Budget</label>
-                  <Input name="budget" placeholder="e.g. ₹1L – ₹3L" value={formData.budget} onChange={handleChange} />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium">Primary Goal</label>
-                  <Input name="goal" placeholder="e.g. More leads, Better ROAS" value={formData.goal} onChange={handleChange} />
                 </div>
               </div>
               <div className="space-y-1.5">

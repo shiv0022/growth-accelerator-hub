@@ -11,7 +11,7 @@ const InquirySection = () => {
   const { ref, isVisible } = useScrollReveal();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", businessType: "", budget: "", goal: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", businessType: "", message: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -20,16 +20,6 @@ const InquirySection = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-
-    const msg = [
-      `👋 *New Inquiry from RecallX Website*`,
-      ``,
-      `*Name:* ${formData.name}`,
-      `*Business Type:* ${formData.businessType}`,
-      formData.budget ? `*Monthly Budget:* ${formData.budget}` : "",
-      formData.goal ? `*Primary Goal:* ${formData.goal}` : "",
-      formData.message ? `*Message:* ${formData.message}` : "",
-    ].filter(Boolean).join("\n");
 
     // Save to Google Sheets
     try {
@@ -42,8 +32,6 @@ const InquirySection = () => {
           email: formData.email,
           phone: formData.phone,
           company: formData.businessType,
-          budget: formData.budget,
-          goal: formData.goal,
           services: "",
           message: formData.message,
         }),
@@ -54,7 +42,7 @@ const InquirySection = () => {
 
     setLoading(false);
     setSubmitted(true);
-    setFormData({ name: "", email: "", phone: "", businessType: "", budget: "", goal: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", businessType: "", message: "" });
     setTimeout(() => setSubmitted(false), 5000);
   };
 
@@ -88,10 +76,6 @@ const InquirySection = () => {
           <div className="grid sm:grid-cols-2 gap-5">
             <Input name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} />
             <Input name="businessType" placeholder="Business Type *" required value={formData.businessType} onChange={handleChange} />
-          </div>
-          <div className="grid sm:grid-cols-2 gap-5">
-            <Input name="budget" placeholder="Monthly Budget (e.g. ₹1L–₹3L)" value={formData.budget} onChange={handleChange} />
-            <Input name="goal" placeholder="Primary Goal" value={formData.goal} onChange={handleChange} />
           </div>
           <Textarea name="message" placeholder="Tell us more about your project..." rows={4} value={formData.message} onChange={handleChange} />
           <Button type="submit" size="lg" className="w-full gap-2 shadow-lg shadow-primary/20" disabled={loading}>
