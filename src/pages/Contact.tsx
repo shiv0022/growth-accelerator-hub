@@ -31,10 +31,6 @@ const faqs = [
     q: "Do you provide monthly reports?",
     a: "Absolutely. Every client gets a detailed monthly performance report with key metrics, insights, and recommendations for the next month.",
   },
-  {
-    q: "Can you work with our existing team or agency?",
-    a: "Yes! We're happy to collaborate with your in-house team or complement another agency's work. We believe in flexible, transparent partnerships.",
-  },
 ];
 
 const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxOSZr74hA1osy9_PcdFd2UQGeIMTRZoU8mCuYjNOcH8OmaNZepJa9_QdlRlkRuKjCt/exec";
