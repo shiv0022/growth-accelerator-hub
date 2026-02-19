@@ -36,7 +36,7 @@ const HeroSection = () => {
       </div>
 
       <div ref={ref} className="container-main text-center max-w-3xl mx-auto relative z-10">
-        <h1 className={`text-2xl sm:text-4xl md:text-6xl font-extrabold leading-tight tracking-tight text-foreground ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
+        <h1 className={`text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-foreground ${isVisible ? "animate-fade-up" : "opacity-0"}`}>
           Scale Faster. Convert Better.{" "}
           <span className="text-primary">Dominate Digital.</span>
         </h1>
