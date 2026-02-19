@@ -27,7 +27,7 @@ const HeroSection = () => {
           clearInterval(interval);
           setIsTypingDone(true);
         }
-      }, 30);
+      }, 8);
       return () => clearInterval(interval);
     } else {
       setDisplayedText("");
