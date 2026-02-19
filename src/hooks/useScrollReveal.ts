@@ -8,20 +8,10 @@ export function useScrollReveal(threshold = 0.1) {
     const el = ref.current;
     if (!el) return;
 
-    // Check if already in viewport on mount
-    const rect = el.getBoundingClientRect();
-    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    if (alreadyVisible) {
-      setIsVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        // Toggle on every intersection — animate in & out
+        setIsVisible(entry.isIntersecting);
       },
       { threshold }
     );
@@ -31,4 +21,3 @@ export function useScrollReveal(threshold = 0.1) {
 
   return { ref, isVisible };
 }
-
