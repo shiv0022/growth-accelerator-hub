@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "What's the minimum budget to work with RecallX?",
-    a: "We work with businesses with ad budgets starting from ₹50,000/month. We also offer consulting-only packages for smaller budgets.",
+    a: "Our pricing depends on your work scope and goals — not a fixed number. We keep our packages market-competitive and genuinely affordable for Indian businesses. Whether you're just starting out or scaling up, we'll find a plan that fits your budget.",
   },
   {
     q: "Do you offer a free consultation?",
