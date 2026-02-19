@@ -23,6 +23,18 @@ const faqs = [
     q: "Which industries do you specialize in?",
     a: "We've worked across e-commerce, healthcare, real estate, SaaS, education, and local services. Our strategies are always customized.",
   },
+  {
+    q: "How long does it take to see results?",
+    a: "Paid ads typically show results within 2–4 weeks. SEO and organic strategies take 3–6 months to show significant growth. We set realistic expectations from day one.",
+  },
+  {
+    q: "Do you provide monthly reports?",
+    a: "Absolutely. Every client gets a detailed monthly performance report with key metrics, insights, and recommendations for the next month.",
+  },
+  {
+    q: "Can you work with our existing team or agency?",
+    a: "Yes! We're happy to collaborate with your in-house team or complement another agency's work. We believe in flexible, transparent partnerships.",
+  },
 ];
 
 const SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxOSZr74hA1osy9_PcdFd2UQGeIMTRZoU8mCuYjNOcH8OmaNZepJa9_QdlRlkRuKjCt/exec";
@@ -125,7 +137,7 @@ const ContactPage = () => {
         </div>
 
         {/* Main: Form + FAQ side by side */}
-        <div className="container-main grid lg:grid-cols-5 gap-10">
+        <div className="container-main grid lg:grid-cols-5 gap-10 items-start">
 
           {/* Form — wider */}
           <div className="lg:col-span-3">
@@ -201,7 +213,7 @@ const ContactPage = () => {
           </div>
 
           {/* FAQ — narrower */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 flex flex-col">
             <h2 className="text-xl font-bold mb-5">Common Questions</h2>
             <div className="space-y-3">
               {faqs.map((f, i) => (
