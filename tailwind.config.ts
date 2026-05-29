@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Montserrat", "sans-serif"],
+        heading: ["Inter", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
       colors: {
@@ -70,6 +70,10 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      transitionTimingFunction: {
+        "axion-ease": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "axion-spring": "cubic-bezier(0.32, 0.72, 0, 1)",
       },
       keyframes: {
         "accordion-down": {
