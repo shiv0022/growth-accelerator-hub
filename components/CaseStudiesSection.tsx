@@ -11,14 +11,6 @@ export default function CaseStudiesSection() {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return (
-      <section id="results" className="bg-[#F5F5F5] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28">
-        <div className="max-w-[1440px] mx-auto text-center text-gray-500">Loading client work...</div>
-      </section>
-    );
-  }
-
   return (
     <section id="results" className="relative bg-[#F5F5F5] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28 font-sans">
       <AnimatedPopAd

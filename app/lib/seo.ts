@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_NAME = "RecallX Marketing";
 export const DEFAULT_OG_IMAGE = "/hero-bg.jpg";
 
-const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://recallxmarketing.com";
 export const SITE_URL = rawSiteUrl.endsWith("/") ? rawSiteUrl.slice(0, -1) : rawSiteUrl;
 
 const BASE_KEYWORDS = [

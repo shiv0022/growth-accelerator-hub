@@ -87,19 +87,14 @@ function DashboardPreviewSim() {
   );
 }
 
-export default function HeroSection() {
+export default function HeroSection({ initialConfig }: { initialConfig: HeroConfig }) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [config, setConfig] = useState<HeroConfig>({
-    type: "3d",
-    videoUrl: "",
-    imageUrl: ""
-  });
+  const [config, setConfig] = useState<HeroConfig>(initialConfig);
 
   useEffect(() => {
     setMounted(true);
-    const current = db.getHeroConfig();
-    setConfig(current);
+    setConfig(db.getHeroConfig());
 
     const handleStorageChange = () => {
       setConfig(db.getHeroConfig());
@@ -119,41 +114,39 @@ export default function HeroSection() {
     };
   }, [config.type, config.imageUrl, config.videoUrl]);
 
-  if (!mounted) {
-    return (
-      <section className="relative min-h-[85vh] flex items-center justify-center bg-[#EFEFEF]" />
-    );
-  }
-
   return (
     <section className="relative min-h-screen flex items-center pt-20 sm:pt-24 pb-12 sm:pb-16 overflow-hidden bg-[#EFEFEF]">
       {/* Animated Shader Overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none">
-        <Shader className="absolute inset-0 w-full h-full">
-          <Swirl colorA="#ffffff" colorB="#f0f0f0" detail={1.7} />
-          <ChromaFlow 
-            baseColor="#ffffff" 
-            downColor="#0066FF" 
-            leftColor="#0066FF" 
-            rightColor="#0066FF" 
-            upColor="#0066FF" 
-            momentum={13} 
-            radius={3.5} 
-          />
-          <FlutedGlass 
-            aberration={0.61} 
-            angle={31} 
-            frequency={8} 
-            highlight={0.12} 
-            highlightSoftness={0} 
-            lightAngle={-90} 
-            refraction={4} 
-            shape="rounded" 
-            softness={1} 
-            speed={0.15} 
-          />
-          <FilmGrain strength={0.05} />
-        </Shader>
+        {mounted ? (
+          <Shader className="absolute inset-0 w-full h-full">
+            <Swirl colorA="#ffffff" colorB="#f0f0f0" detail={1.7} />
+            <ChromaFlow 
+              baseColor="#ffffff" 
+              downColor="#0066FF" 
+              leftColor="#0066FF" 
+              rightColor="#0066FF" 
+              upColor="#0066FF" 
+              momentum={13} 
+              radius={3.5} 
+            />
+            <FlutedGlass 
+              aberration={0.61} 
+              angle={31} 
+              frequency={8} 
+              highlight={0.12} 
+              highlightSoftness={0} 
+              lightAngle={-90} 
+              refraction={4} 
+              shape="rounded" 
+              softness={1} 
+              speed={0.15} 
+            />
+            <FilmGrain strength={0.05} />
+          </Shader>
+        ) : (
+          <div className="absolute inset-0 w-full h-full bg-[#EFEFEF]" />
+        )}
       </div>
 
       <div className="container-main max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-20 w-full h-full mt-4">

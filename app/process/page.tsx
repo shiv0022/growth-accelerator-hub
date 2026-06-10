@@ -1,9 +1,6 @@
-"use client";
-
-import { ArrowRight, ClipboardCheck, Lightbulb, Rocket, TrendingUp, CheckCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { ClipboardCheck, Lightbulb, Rocket, TrendingUp, CheckCircle } from "lucide-react";
 import Card3DTilt from "@/components/Card3DTilt";
+import { BreadcrumbListSchema } from "@/components/JsonLd";
 
 const steps = [
   {
@@ -85,15 +82,21 @@ const steps = [
 ];
 
 export default function ProcessPage() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background font-sans">
+      {/* Breadcrumbs Schema */}
+      <BreadcrumbListSchema
+        items={[
+          { name: "Home", url: "https://recallxmarketing.com" },
+          { name: "Process", url: "https://recallxmarketing.com/process" }
+        ]}
+      />
+
       <main className="py-16 md:py-24">
         {/* Hero */}
         <div className="container-main text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Our Process</p>
-          <h1 className="text-4xl md:text-6xl font-sans font-medium tracking-tight text-foreground leading-tight mb-4">
+          <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground leading-tight mb-4">
             How We Deliver <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0066FF] to-[#06b6d4]">Consistent Results</span>
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed">
@@ -124,12 +127,12 @@ export default function ProcessPage() {
                     </div>
 
                     <p className="text-[10px] font-bold text-primary uppercase tracking-wider mb-1">{s.tagline}</p>
-                    <h2 className="text-xl md:text-2xl font-sans font-semibold text-foreground mb-3">{s.title}</h2>
+                    <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-3">{s.title}</h2>
                     <p className="text-xs text-muted-foreground mb-6 leading-relaxed">{s.desc}</p>
                     
                     <ul className="space-y-2 mb-6">
                       {s.activities.map((a) => (
-                        <li key={a} className="flex items-center gap-2.5 text-xs text-foreground/80">
+                        <li key={a} className="flex items-center gap-2.5 text-xs text-foreground/80 font-medium">
                           <CheckCircle size={13} className="text-primary flex-shrink-0" />
                           {a}
                         </li>

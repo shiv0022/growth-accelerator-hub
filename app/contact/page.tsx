@@ -5,6 +5,7 @@ import { Mail, MessageCircle, Clock, MapPin, Send, CheckCircle2, ChevronDown } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { BreadcrumbListSchema, FAQPageSchema } from "@/components/JsonLd";
 
 const faqs = [
   {
@@ -92,7 +93,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background font-sans">
+      <BreadcrumbListSchema
+        items={[
+          { name: "Home", url: "https://recallxmarketing.com" },
+          { name: "Contact", url: "https://recallxmarketing.com/contact" }
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} />
       <main className="py-16 md:py-24">
         {/* Hero */}
         <div className="container-main text-center max-w-2xl mx-auto mb-14 animate-fade-in">

@@ -62,6 +62,22 @@ export default function Footer() {
         </div>
 
       </div>
+
+      {/* Locations SEO list */}
+      <div className="mt-8 pt-6 border-t border-gray-100 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] text-gray-400 font-semibold">
+        <span className="uppercase text-gray-500 tracking-wider">Locations Served:</span>
+        <Link href="/locations/india" className="hover:text-gray-900 transition-colors">India</Link>
+        <span>•</span>
+        <Link href="/locations/delhi" className="hover:text-gray-900 transition-colors">Delhi</Link>
+        <span>•</span>
+        <Link href="/locations/noida" className="hover:text-gray-900 transition-colors">Noida</Link>
+        <span>•</span>
+        <Link href="/locations/gurgaon" className="hover:text-gray-900 transition-colors">Gurgaon</Link>
+        <span>•</span>
+        <Link href="/locations/mumbai" className="hover:text-gray-900 transition-colors">Mumbai</Link>
+        <span>•</span>
+        <Link href="/locations/bangalore" className="hover:text-gray-900 transition-colors">Bangalore</Link>
+      </div>
     </footer>
   );
 }

@@ -1,9 +1,6 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { ArrowRight, Database, Target, Zap, FileText, Users, Award, Shield, CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Database, Target, Zap, FileText, Users, Shield, CheckCircle } from "lucide-react";
 import Card3DTilt from "@/components/Card3DTilt";
+import { BreadcrumbListSchema } from "@/components/JsonLd";
 
 const differentiators = [
   {
@@ -52,15 +49,21 @@ const stats = [
 ];
 
 export default function WhyUsPage() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background font-sans">
+      {/* Breadcrumbs Schema */}
+      <BreadcrumbListSchema
+        items={[
+          { name: "Home", url: "https://recallxmarketing.com" },
+          { name: "About Us", url: "https://recallxmarketing.com/why-us" }
+        ]}
+      />
+
       <main className="py-16 md:py-24">
         {/* Hero */}
         <div className="container-main text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Why Choose Us</p>
-          <h1 className="text-4xl md:text-6xl font-sans font-medium tracking-tight text-foreground leading-tight mb-4">
+          <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground leading-tight mb-4">
             The RecallX <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0066FF] to-[#06b6d4]">Difference</span>
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed">
@@ -92,12 +95,12 @@ export default function WhyUsPage() {
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4 border border-primary/20">
                 <d.icon size={22} strokeWidth={1.5} />
               </div>
-              <h2 className="text-xl font-sans font-semibold mb-3 text-foreground">{d.title}</h2>
+              <h2 className="text-xl font-semibold mb-3 text-foreground">{d.title}</h2>
               <p className="text-xs text-muted-foreground leading-relaxed mb-5">{d.desc}</p>
               
               <div className="grid sm:grid-cols-2 gap-2 border-t border-border/40 pt-4 mt-auto">
                 {d.details.map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-[11px] text-foreground/80">
+                  <div key={item} className="flex items-center gap-2 text-[11px] text-foreground/80 font-medium">
                     <CheckCircle size={12} className="text-primary flex-shrink-0" />
                     {item}
                   </div>

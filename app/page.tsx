@@ -1,28 +1,25 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import ProcessSection from "@/components/ProcessSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
+import { db } from "@/app/lib/db";
+import { OrganizationSchema, WebSiteSchema, ProfessionalServiceSchema } from "@/components/JsonLd";
 
 export default function IndexPage() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div className="min-h-screen bg-[#EFEFEF]" />;
-  }
+  const services = db.getServices();
+  const heroConfig = db.getHeroConfig();
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Dynamic Structured Data for Search Engine Optimization */}
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <ProfessionalServiceSchema />
+
       <main>
-        <HeroSection />
-        <ServicesSection />
+        <HeroSection initialConfig={heroConfig} />
+        <ServicesSection initialServices={services} />
         <WhyChooseSection />
         <ProcessSection />
         <CaseStudiesSection />
@@ -30,3 +27,4 @@ export default function IndexPage() {
     </div>
   );
 }
+

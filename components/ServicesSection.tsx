@@ -16,8 +16,8 @@ const iconMap: Record<string, LucideIcon> = {
   "service-6": Star,
 };
 
-export default function ServicesSection() {
-  const [services, setServices] = useState<ServiceItem[]>([]);
+export default function ServicesSection({ initialServices = [] }: { initialServices?: ServiceItem[] }) {
+  const [services, setServices] = useState<ServiceItem[]>(initialServices);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,14 +35,6 @@ export default function ServicesSection() {
       clearInterval(interval);
     };
   }, []);
-
-  if (!mounted) {
-    return (
-      <section id="services" className="py-16 md:py-24 bg-white">
-        <div className="container-main text-center text-gray-500">Loading Services...</div>
-      </section>
-    );
-  }
 
   return (
     <section id="services" className="relative bg-white pt-16 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 overflow-hidden font-sans">

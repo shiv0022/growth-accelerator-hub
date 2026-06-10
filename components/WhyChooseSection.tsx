@@ -19,9 +19,13 @@ const differentiators: Differentiator[] = [
 ];
 
 function StatItem({ end, suffix, label }: { end: number; suffix: string; label: string }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end); // Pre-render target number for SSR/SEO indexing
   const elementRef = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
+
+  useEffect(() => {
+    setCount(0); // Reset to 0 on client mount to trigger counting animation
+  }, [end]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

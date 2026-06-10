@@ -1,8 +1,19 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/admin/page": "app/admin/page.js",
+  "/api/admin/logout/route": "app/api/admin/logout/route.js",
+  "/api/admin/me/route": "app/api/admin/me/route.js",
   "/page": "app/page.js",
-  "/why-us/page": "app/why-us/page.js",
-  "/contact/page": "app/contact/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/process/page": "app/process/page.js",
   "/services/page": "app/services/page.js",
   "/blog/page": "app/blog/page.js",
-  "/results/page": "app/results/page.js"
+  "/contact/page": "app/contact/page.js",
+  "/results/page": "app/results/page.js",
+  "/why-us/page": "app/why-us/page.js",
+  "/results/[id]/page": "app/results/[id]/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js"
 }
