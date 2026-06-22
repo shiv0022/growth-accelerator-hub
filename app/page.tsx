@@ -3,6 +3,7 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import ProcessSection from "@/components/ProcessSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
+import FaqSection from "@/components/FaqSection";
 import { db } from "@/app/lib/db";
 import { OrganizationSchema, WebSiteSchema, ProfessionalServiceSchema } from "@/components/JsonLd";
 
@@ -23,6 +24,7 @@ export default function IndexPage() {
         <WhyChooseSection />
         <ProcessSection />
         <CaseStudiesSection />
+        <FaqSection />
       </main>
     </div>
   );

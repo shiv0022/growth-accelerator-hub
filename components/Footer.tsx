@@ -16,7 +16,7 @@ export default function Footer() {
     { label: "Services", path: "/services" },
     { label: "Process", path: "/process" },
     { label: "Results", path: "/results" },
-    { label: "About", path: "/why-us" },
+    { label: "About Us", path: "/about" },
     { label: "More", path: "/blog" },
     { label: "Contact", path: "/contact" },
   ];
@@ -56,6 +56,11 @@ export default function Footer() {
           <a href="https://wa.me/917982716224" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors" title="WhatsApp Us">
             <MessageCircle size={16} />
           </a>
+          <span className="text-gray-300">|</span>
+          <Link href="/privacy" className="hover:text-gray-900 transition-colors">Privacy</Link>
+          <span className="text-gray-300">•</span>
+          <Link href="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
+          <span className="text-gray-300">|</span>
           <span className="text-xs text-gray-400">
             © {new Date().getFullYear()} RecallX.
           </span>

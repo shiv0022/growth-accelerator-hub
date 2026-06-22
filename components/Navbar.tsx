@@ -15,7 +15,7 @@ export default function Navbar() {
     { label: "Services", path: "/services" },
     { label: "Process", path: "/process" },
     { label: "Results", path: "/results" },
-    { label: "About", path: "/why-us" },
+    { label: "About Us", path: "/about" },
     { label: "More", path: "/blog" },
   ];
 
