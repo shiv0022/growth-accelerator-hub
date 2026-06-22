@@ -29,36 +29,34 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 p-2 sm:p-3 w-full transition-transform duration-300">
-      <div className="max-w-[920px] mx-auto">
+      <div className="max-w-[660px] mx-auto">
 
         {/* Pill-shaped Navbar */}
         <div className="flex items-center justify-between bg-white rounded-full p-[5px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100/80">
           
-          {/* LEFT Logo Wrapper */}
-          <div className="sm:w-[130px] flex justify-start flex-shrink-0">
-            <Link
-              href="/"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-gray-200 bg-white flex items-center justify-center shadow-sm hover:scale-105 transition-transform duration-300"
-            >
-              <Image
-                src="/logo-rx.png"
-                alt="RecallX Marketing Logo"
-                width={72}
-                height={72}
-                className="w-full h-full object-contain p-1"
-                priority
-              />
-            </Link>
-          </div>
+          {/* LEFT Logo */}
+          <Link
+            href="/"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-gray-200 bg-white flex items-center justify-center shadow-sm hover:scale-105 transition-transform duration-300 flex-shrink-0 ml-1.5"
+          >
+            <Image
+              src="/logo-rx.png"
+              alt="RecallX Marketing Logo"
+              width={72}
+              height={72}
+              className="w-full h-full object-contain p-1"
+              priority
+            />
+          </Link>
           
           {/* Centered Navigation Links */}
-          <div className="flex-1 flex justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-1">
-            <div className="flex items-center gap-3 sm:gap-5 md:gap-6 py-1">
+          <div className="flex-grow flex justify-center overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-2">
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-4 py-1">
               {links.map((link) => (
                 <Link
                   key={link.label}
                   href={link.path}
-                  className={`text-[12px] sm:text-[14px] font-medium whitespace-nowrap transition-colors duration-300 ${
+                  className={`text-[12px] sm:text-[13px] md:text-[14px] font-medium whitespace-nowrap transition-colors duration-300 ${
                     pathname === link.path 
                       ? "text-[#0066FF] font-semibold" 
                       : "text-gray-900 hover:text-gray-500"
@@ -70,8 +68,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* RIGHT Contact Button Wrapper */}
-          <div className="sm:w-[130px] flex justify-end flex-shrink-0">
+          {/* RIGHT Contact Button */}
+          <div className="flex-shrink-0 mr-1">
             {/* Desktop Contact Us Button */}
             <Link 
               href="/contact" 
