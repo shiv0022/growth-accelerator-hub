@@ -141,37 +141,12 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes popAdIn {
-    0% { opacity: 0; transform: scale(0.8) translateY(12px); }
-    60% { opacity: 1; transform: scale(1.04) translateY(0); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  @keyframes popAdFloat {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0); }
-  }
-
-  @keyframes popAdPulse {
-    0%, 100% { box-shadow: 0 8px 24px rgba(0, 102, 255, 0.14); }
-    50% { box-shadow: 0 12px 30px rgba(0, 102, 255, 0.24); }
-  }
-
   .animate-fade-in {
     animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-fade-up {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-pop-ad {
-    animation: popAdIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards, popAdFloat 3.4s ease-in-out 0.65s infinite;
-  }
-
-  .animate-pop-ad-pulse {
-    animation: popAdPulse 2.2s ease-in-out infinite;
   }
 
   /* Liquid Glass Styles */

@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Database, Target, Zap, FileText, LucideIcon } from "lucide-react";
 import Card3DTilt from "./Card3DTilt";
-import AnimatedPopAd from "./AnimatedPopAd";
 
 interface Differentiator {
   icon: LucideIcon;
@@ -82,14 +81,6 @@ function StatItem({ end, suffix, label }: { end: number; suffix: string; label: 
 export default function WhyChooseSection() {
   return (
     <section id="why-us" className="py-20 bg-white border-y border-gray-100 relative font-sans">
-      <AnimatedPopAd
-        badge="Trusted"
-        title="50+ Brands Scaled"
-        subtext="Senior team handling strategy and execution end to end."
-        ctaText="See Results"
-        ctaHref="/results"
-        className="top-8 right-4 sm:right-8 lg:right-12"
-      />
       <div className="container-main max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
         
         {/* Header */}

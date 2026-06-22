@@ -2,7 +2,6 @@
 
 import { ClipboardCheck, Lightbulb, Rocket, TrendingUp } from "lucide-react";
 import Card3DTilt from "./Card3DTilt";
-import AnimatedPopAd from "./AnimatedPopAd";
 
 const steps = [
   { icon: ClipboardCheck, title: "Audit", desc: "Deep-dive analysis of your current marketing channels, website conversion friction points, and competitor metrics." },
@@ -14,13 +13,6 @@ const steps = [
 export default function ProcessSection() {
   return (
     <section id="process" className="py-20 bg-white relative overflow-hidden font-sans border-t border-gray-100">
-      <AnimatedPopAd
-        badge="Fast Track"
-        title="90-Day Growth Plan"
-        subtext="Get your custom execution roadmap in week one."
-        ctaText="Start Now"
-        className="top-8 right-4 sm:right-8 lg:right-12"
-      />
       <div className="container-main max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
         
         {/* Header */}

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import AnimatedPopAd from "./AnimatedPopAd";
 
 export default function CaseStudiesSection() {
   const [mounted, setMounted] = useState(false);
@@ -13,14 +12,6 @@ export default function CaseStudiesSection() {
 
   return (
     <section id="results" className="relative bg-[#F5F5F5] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28 font-sans">
-      <AnimatedPopAd
-        badge="Case Study"
-        title="Live ROI Breakdowns"
-        subtext="Explore before/after metrics from recent client campaigns."
-        ctaText="Open Results"
-        ctaHref="/results"
-        className="top-8 right-4 sm:right-8 lg:right-12"
-      />
       <div className="max-w-[1440px] mx-auto">
         
         {/* Badge row */}

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Users, Sparkles, Globe, Smartphone, BarChart3, Star, LucideIcon } from "lucide-react";
 import { db, ServiceItem } from "@/app/lib/db";
 import Card3DTilt from "./Card3DTilt";
-import AnimatedPopAd from "./AnimatedPopAd";
 
 // Map IDs to Lucide Icons
 const iconMap: Record<string, LucideIcon> = {
@@ -38,13 +37,6 @@ export default function ServicesSection({ initialServices = [] }: { initialServi
 
   return (
     <section id="services" className="relative bg-white pt-16 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 overflow-hidden font-sans">
-      <AnimatedPopAd
-        badge="Limited"
-        title="Performance Pack"
-        subtext="Bundle SEO + Ads + CRO with faster execution."
-        ctaText="View Plans"
-        className="top-8 right-4 sm:right-8 lg:right-12"
-      />
       <div className="max-w-[1440px] mx-auto">
         
         {/* Badge row */}
