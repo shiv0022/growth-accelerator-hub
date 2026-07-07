@@ -10,15 +10,19 @@ import { BreadcrumbListSchema } from "@/components/JsonLd";
 export default function BlogListPageClient({ initialBlogs = [] }: { initialBlogs: Blog[] }) {
   const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Always read from localStorage on mount to pick up user-created blogs
+    // (server only returns DEFAULT_BLOGS since localStorage is unavailable there)
     setBlogs(db.getBlogs());
+    setMounted(true);
 
     const handleSync = () => {
       setBlogs(db.getBlogs());
     };
     window.addEventListener("storage", handleSync);
-    const interval = setInterval(handleSync, 1000);
+    const interval = setInterval(handleSync, 2000);
     return () => {
       window.removeEventListener("storage", handleSync);
       clearInterval(interval);

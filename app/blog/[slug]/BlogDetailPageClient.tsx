@@ -19,14 +19,15 @@ export default function BlogDetailPageClient({
   const [blog, setBlog] = useState<Blog | null>(initialBlog);
 
   useEffect(() => {
-    // If not loaded on server (e.g. dynamic local storage blog created on client), try client-side fetch
-    if (!blog && slug) {
+    // Always try client-side lookup from localStorage on mount.
+    // Server-side can only find DEFAULT_BLOGS; user-created blogs only exist in localStorage.
+    if (slug) {
       const match = db.getBlogBySlug(slug);
       if (match) {
         setBlog(match);
       }
     }
-  }, [slug, blog]);
+  }, [slug]);
 
   const formatDate = (isoString: string) => {
     return new Date(isoString).toLocaleDateString("en-IN", {
